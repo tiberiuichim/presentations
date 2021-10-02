@@ -1,0 +1,1 @@
+Presentation of volto Pluggables
