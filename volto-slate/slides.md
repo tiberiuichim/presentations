@@ -2,11 +2,21 @@
 class:
   - invert
 headingDivider: 2
-theme: gaia
+theme: gaia 
 style: |
-  section {
-  }
+    section {
+    }
 ---
+
+<style>
+  .hljs-name {
+    color: maroon !important;
+  }
+
+  .hljs-tag {
+    color: orange !important;
+  }
+</style>
 
 # volto-slate
 <!-- _class: lead invert -->
@@ -148,7 +158,7 @@ and chose to reimplement its line editor?
 
 With Slate you can easily overload the builtin editor:
 
-```
+```jsx
 const withImages = editor => {
   const { isVoid } = editor
   editor.isVoid = element => {
@@ -157,7 +167,7 @@ const withImages = editor => {
   return editor
 }
 ```
-```
+```jsx
 import { createEditor } from 'slate'
 const editor = withImages(createEditor())
 ```
@@ -183,7 +193,7 @@ the underlying ecosystem is buggy.
 
 ## Slate has a simple DOM-like storage for its values
 
-```
+```js
 "value": [
   {
     "children": [
@@ -209,7 +219,7 @@ Slate has a simple DOM-like storage for its values, so we were able to implement
 
 ## Draftjs:
 
-```
+```js
   "blocks": [
     {
       "data": {},
@@ -232,7 +242,7 @@ Slate has a simple DOM-like storage for its values, so we were able to implement
 
 ## volto-slate rendering
 
-```
+```jsx
 const _serializeNodes = (nodes) => {
     return (nodes || []).map(([node, path], i) => {
       return Text.isText(node) ? (
