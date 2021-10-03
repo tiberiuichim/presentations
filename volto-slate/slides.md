@@ -2,20 +2,29 @@
 class:
   - invert
 headingDivider: 2
-theme: gaia 
+theme: gaia
 style: |
     section {
     }
 ---
+  
 
 <style>
   .hljs-name {
-    color: maroon !important;
+    color: #7ee787 !important;
   }
 
   .hljs-tag {
-    color: orange !important;
+    color: #79c0ff !important;
   }
+    section.invert {
+       --color-background: #0d1117 !important;
+        padding: 20px 70px !important;
+    }
+   section code {
+        color: #c9d1d9 !important;
+        background: #161b22 !important;
+   }
 </style>
 
 # volto-slate
