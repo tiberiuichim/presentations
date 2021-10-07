@@ -1,8 +1,4 @@
-Pluggables
-
-<!-- At last year's Plone conf I gave a presentation on "Volto Blocks development -->
-<!-- patters", where I've showcased some of the patterns we've developed to make the -->
-<!-- Volto Blocks more reusable. -->
+# Pluggables
 
 - A generic framework to enable pluggability and configuration "from the
   outside".
@@ -91,6 +87,8 @@ passing down props "out of tree" and more, as a generic framework.
   pluggable way to add controls to blocks. A guaranteed pluggable toolbar for
   blocks would enable that.
 
+Showcase
+https://github.com/plone/volto/blob/2d8f943a8c82795b2068b58a2a7c07c56fd41d80/src/components/manage/Blocks/Block/GroupedMenuButtons.jsx
 
 ## Limitations
 
