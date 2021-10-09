@@ -6,6 +6,14 @@ the BISE project for EEA.
 Probably the most important Volto addon, right now. If you start a new Volto
 project, it is one addon that you should include in your project.
 
+### volto slate demo
+
+It's boring, just like a text editor should be.
+
+- Show off the style menu
+- Show off editing data entities
+- Show off editing footnotes, zotero
+
 ## History
 
 - in winter 2019-2020 we were working on forest.eea.europa.eu and the mockup
@@ -42,11 +50,24 @@ The volto-slate has a number of its own plugins:
 ## Rough comparison draftjs vs slate
 
 - slate backed by an open source community, just like Plone
-- draftjs is from Facebook, but not much activity in the last few years
+- draftjs is from Facebook
 
-##
+SlateJS has a lot more OS activity. It is also respected. TinyMCE's
+RealTimeEditor is using it, Tiny contributors are contributing to Slate
 
-What is volto-slate
+https://github.com/ianstormtaylor/slate/pull/4518
+
+## What is SlateJS
+
+The key to understanding exactly what volto-slate means is understanding the
+underlying library, SlateJS. SlateJS is not an editor, it is a framework to
+build rich text editor. What types of elements, how they are rendered, etc,
+nothing like that is defined in any of the slatejs packages.
+
+With volto-slate we're trying to build a superset of an HTML-compatible
+richtext editor. Why HTML compatible? Being so ubiquitous, you will find
+libraries and tools to handle it, and external systems (indexing, etc) are
+usually equiped to deal with it.
 
 ## A look at slate internal trees
 
@@ -74,8 +95,11 @@ that just outputs React components and their children.
 const serializeNodes(nodes) =>
   nodes.map(node => isText(node)
     ? <Leaf>{node.text}<Leaf>
-    : <Element>{serializeNodes(node.children)}</Element>);
+    : <Element mode='view'>{serializeNodes(node.children)}</Element>);
 ```
+
+This is just "converting", the actual rendering of the component is done by
+React. To convert to real HTML, in the HTML-saving widget, we also use React.
 
 ## Deep understanding of Volto
 
@@ -90,9 +114,10 @@ So we have rules such as:
 - hit enter in the middle of a block it will split the block in two
 - unless you're in a list
 - backspace at the beginning of a line joins it with the previous block
+- ...
 
-And because the basic slate block becomes the immediate interface for other
-functionality, we're also providing additional functionality:
+And because the basic slate block becomes the default UI for interaction,
+we're also providing additional functionality:
 
 - when pasting HTML, it converts it to Volto blocks: multiple paragraphs as
   multiple Volto blocks, images transformed to Volto image blocks, tables to
@@ -101,7 +126,9 @@ functionality, we're also providing additional functionality:
 - you can drag/drop an image in a slate block and we'll create a new Volto
   image block.
 
-## The component hierarchy
+## A layered architecutre
+
+The component hierarchy
 
 At the root sits the SlateEditor component, it is the most basic one. On top of
 it are built the block-level components (TextBlock with its DetachedTextBlock
@@ -146,6 +173,18 @@ const withInlineLink = (editor) => {
 editor = withInlineLink(editor);
 ```
 
+So the rules that make all the special behavior are also configurable.
+
+TODO: insert code fragment of configuration lists
+
+## Copy/paste of rendered volto-slate output
+
+In the rendered output of special slate elements we include special `data-`
+attributes so that when you copy rendered output and paste into slate blocks,
+we shortcut the deserialization process and we reconstruct the original special
+slate element. A rendered footnote, copy/pasted is not transformed to a simple
+link, but is rebuilt as a footnote.
+
 ## ElementEditor
 
 The element editor component provides an easy to use framework to write custom
@@ -174,20 +213,22 @@ the markup styles applied to the placeholder text and apply them to the final
 rendered output, no matter if it's a simple text or compound elements such as
 a list.
 
-## Copy/paste of rendered volto-slate output
+## Are we there yet?
 
-In the rendered output of special slate elements we include special `data-`
-attributes so that when you copy rendered output and paste into slate blocks,
-we shortcut the deserialization process and we reconstruct the original special
-slate element. A rendered footnote, copy/pasted is not transformed to a simple
-link, but is rebuilt as a footnote.
+My feeling is that there's still a ton to improve and to get to a level of
+parity with other editors. The editor is being used already by several
+projects. It is an improvement over the default draftjs editor.
 
 ## Wishlist
 
+- a complete HTML transformation story
 - better, more normalization rules, maybe based on typed schema
 - allow passing down a local configuration, for more specialized editors
 - refactor the ElementEditor ContextEditor implementation (persistentHelpers)
+- Quanta toolbar
 
 ## Migration to-from volto-slate
 
--
+- Work has started on a Python-based html-to-json and json-to-html converters.
+- Code exists already that migrates html to slate blocks, via nodejs external
+  converter
