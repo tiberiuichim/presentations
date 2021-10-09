@@ -6,6 +6,13 @@ the BISE project for EEA.
 Probably the most important Volto addon, right now. If you start a new Volto
 project, it is one addon that you should include in your project.
 
+Nobody wants to think about the editor. We mostly take them for granted. But
+volto-slate is probably not even the fifth in line of Plone richtext editors
+(Kupu, FCK, Tiny, Draft, etc).
+
+Requirements change, the web changes, etc. And if I'd have time today, I might
+even start another volto-slate alternative.
+
 ### volto slate demo
 
 It's boring, just like a text editor should be.
@@ -49,11 +56,11 @@ The volto-slate has a number of its own plugins:
 
 ## Rough comparison draftjs vs slate
 
-- slate backed by an open source community, just like Plone
+- Slatejs backed by an open source community, just like Plone
 - draftjs is from Facebook
 
-SlateJS has a lot more OS activity. It is also respected. TinyMCE's
-RealTimeEditor is using it, Tiny contributors are contributing to Slate
+SlateJS has a lot more OS activity and there's even contributions from TinyMCE
+developers.
 
 https://github.com/ianstormtaylor/slate/pull/4518
 
@@ -65,9 +72,11 @@ build rich text editor. What types of elements, how they are rendered, etc,
 nothing like that is defined in any of the slatejs packages.
 
 With volto-slate we're trying to build a superset of an HTML-compatible
-richtext editor. Why HTML compatible? Being so ubiquitous, you will find
-libraries and tools to handle it, and external systems (indexing, etc) are
-usually equiped to deal with it.
+richtext editor. Why HTML compatible? Even if it's complex and we'd rather deal
+with semantically marked up elements, being so ubiquitous,
+interoperability will never be a problem. You will find libraries and tools to
+handle it, and external systems (indexing, etc) are usually equiped to deal
+with it.
 
 ## A look at slate internal trees
 
@@ -84,12 +93,12 @@ source. Example (pseudocode):
 ```
 
 Does it render as `<b><a /></b>` or `<a><b></b></a>`. Does it matter? For
-styling purposes and accuracy, yes.
+styling purposes and accuracy, yes, it does.
 
 ## Slate output rendering
 
 Being close to the HTML DOM model, the rendering is a single recursive function
-that just outputs React components and their children.
+that just outputs React components and their children. (pseudocode)
 
 ```
 const serializeNodes(nodes) =>
@@ -221,7 +230,7 @@ projects. It is an improvement over the default draftjs editor.
 
 ## Wishlist
 
-- a complete HTML transformation story
+- a complete HTML transformation story (soon to come)
 - better, more normalization rules, maybe based on typed schema
 - allow passing down a local configuration, for more specialized editors
 - refactor the ElementEditor ContextEditor implementation (persistentHelpers)
