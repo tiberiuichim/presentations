@@ -13,6 +13,9 @@ volto-slate is probably not even the fifth in line of Plone richtext editors
 Requirements change, the web changes, etc. And if I'd have time today, I might
 even start another volto-slate alternative.
 
+But at this moment, it is the first time the Plone community owns an editor and
+that is important and the consequences of that are far-reaching.
+
 ### volto slate demo
 
 It's boring, just like a text editor should be.
@@ -83,17 +86,18 @@ with it.
 Slate JSON
 
 Unlike other modern editors that use the concept of "marks" for decorative
-tags (strong, em, etc), volto-slate always uses hard Element nodes. Initially
-we've gone that route as well, but switched when we've realized that when
-ingesting HTML, there's no way to render identical markup similar to the
+tags (strong, em, etc), volto-slate always uses "hard" Element nodes. Initially
+we've gone the 'marks' route as well, but switched when we've realized that
+when ingesting HTML, there's no way to render identical markup similar to the
 source. Example (pseudocode):
 
 ```
-{type: 'a', marks: ['b']}
+{type: 'a', marks: ['strong']}
 ```
 
-Does it render as `<b><a /></b>` or `<a><b></b></a>`. Does it matter? For
-styling purposes and accuracy, yes, it does.
+Does it render as `<strong><a>text</a></strong>` or
+`<a><strong>text</strong></a>`. Does it matter? For styling purposes and
+accuracy, yes, it does.
 
 ## Slate output rendering
 
@@ -109,6 +113,7 @@ const serializeNodes(nodes) =>
 
 This is just "converting", the actual rendering of the component is done by
 React. To convert to real HTML, in the HTML-saving widget, we also use React.
+`renderToStaticMarkup`
 
 ## Deep understanding of Volto
 
@@ -120,7 +125,7 @@ block, Volto provides separate blocks for things like images and tables.
 
 So we have rules such as:
 
-- hit enter in the middle of a block it will split the block in two
+- hit enter in the middle of a block it will split the block in two...
 - unless you're in a list
 - backspace at the beginning of a line joins it with the previous block
 - ...
@@ -146,9 +151,10 @@ variant), then RichTextWidget and HTMLWidget.
 Despite all those Volto-blocks specific features, the TextBlock uses only
 a couple of extra plugins to implement that functionality (mostly related to
 keyboard) and a single principle: at the end of some operations (such as
-paste), we call a single function, `deconstructToVoltoBlocks`, which uses
-configurable `voltoBlockEmiters` to convert Slate nodes to Volto blocks and
-then splits the multiple paragraphs to separate blocks.
+paste), we call a single function, `deconstructToVoltoBlocks`, which
+recursively looks up configurable `voltoBlockEmiters` to convert Slate nodes to
+Volto blocks and then splits the multiple top-level nodes, each to a separate
+block.
 
 ## The text block
 
