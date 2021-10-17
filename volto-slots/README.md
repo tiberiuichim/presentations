@@ -1,1 +1,1 @@
-Presentation on slots
+Presentation on Volto Slots
