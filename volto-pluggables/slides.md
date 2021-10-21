@@ -86,6 +86,7 @@ or in the process of being migrated to Volto.
 -->
 
 ## Why do we need Pluggables?
+<!-- _class: lead invert -->
 
 <!--
 I see Pluggables as a way to provide scalability to Volto interactions and I'll
@@ -137,12 +138,11 @@ don't scare them with dependency injection or component lookup in an opaque
 registry.
 -->
 
-##
+## React data flow
 
 - In React, data flow is top to bottom
 - "out of tree" data needs Redux
 - how to interact with foreign components?
-- Plone has ZCA
 
 <!--
 - A generic framework to enable pluggability and configuration "from the
@@ -208,7 +208,7 @@ once, you include it in the template and it will render things inside it.
 TODO: add ex of ZCML code paralel with Pluggable
 -->
 
-## <Pluggable> = <browser:viewletManager>
+## `<Pluggable>` = `<browser:viewletManager>`
 
 ```
 <browser:viewletManager name="aboveDocumentTitle" />
@@ -219,7 +219,7 @@ vs
 <Pluggable name="aboveDocumentTitle" />
 ```
 
-## <Plug> = <browser:viewlet>
+## `<Plug>` = `<browser:viewlet>`
 
 ```
 <browser:viewlet manager="" />
@@ -246,7 +246,11 @@ passing down props "out of tree" and more, as a generic framework.
 
 ```
 <Plug id="delete-button" pluggable="toolbar"><Button color="blue"></Plug>
-//...
+```
+
+Later, render a Plug with the same id
+
+```
 <Plug id="delete-button" pluggable="toolbar"><Button color="red"></Plug>
 ```
 
@@ -294,6 +298,7 @@ https://github.com/plone/volto/blob/2d8f943a8c82795b2068b58a2a7c07c56fd41d80/src
 
 - No SSR
 - Watch for dependency lists!
+- Limited adoption (yet)
 
 <!--
 Pluggables are not SSR-enabled. Is this a problem? Not really. Slots are an
@@ -325,9 +330,9 @@ The implementation is a Volto port of ...
 
 The Plug
 
-```
+```jsx
 const Plug = ({id, children}) => {
-  const {register} = useContext(PluggablesProvider.Context);
+  const { register } = useContext(PluggablesProvider.Context);
 
   React.useEffect(() => {
     register(id, () => children);
@@ -341,10 +346,12 @@ const Plug = ({id, children}) => {
 
 The Pluggable
 
-```
+```jsx
 const Pluggable = (name) => {
   const { getPlugs } => useContext(PluggablesProvider.Context);
   return getPlugs(name).map(f => f());
 }
 ```
 
+## Thank you!
+<!-- _class: lead invert -->
