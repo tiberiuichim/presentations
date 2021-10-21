@@ -1,5 +1,7 @@
 # Volto Slots
 
+Reuse the Volto blocks as an engine for "layout things".
+
 Context:
 
 Volto has no portlets. If you dig hard enough, you'll find a plone.restapi PR
