@@ -2,6 +2,7 @@
 class:
   - invert
 headingDivider: 2
+paginate: false
 theme: gaia
 style: |
     section {
@@ -33,6 +34,7 @@ style: |
 <!-- _class: lead invert -->
 
 ## tl;dr
+<!-- _backgroundImage: "linear-gradient(to bottom, #67b8e3, #0288d1)" -->
 
 ```jsx
 
@@ -61,6 +63,11 @@ of react-slot-fill.
 - Eaudeweb
 
 <!--  4 minutes
+
+- me
+- client is EEA, big, early
+- starting history
+- moving to Volto
 
 For those of you who don't know me, my name is Tiberiu Ichim, I'm a Plone/Volto
 developer working with Eaudeweb Romania. I'm a core Volto contributor and I've
@@ -93,21 +100,15 @@ I see Pluggables as a way to provide scalability to Volto interactions and I'll
 walk you through this train of thought.
 -->
 
-## Scaling Volto
+## Addons
 
-- Addons!
-
-<!--
-One of our first concerns was: how do we scale Volto? We knew our work
-landscape: multiple websites, small teams, so the "addons story" was one of the
-big first contributions that we made to the Volto project.
--->
-
-## EEA Addons
+<!-- _backgroundImage: "linear-gradient(to bottom, #67b8a3, #0228d1)" -->
 
 TODO: include eea-volto-gh-search.png
 
 <!--
+- > 80 addons
+-
 
 Since then EEA has published over 80 open source Volto addons, websites, Plone
 integration addons, etc. All open in the EEA github organisations. So if you're
@@ -116,6 +117,9 @@ plenty of examples. And of course there are many companies with open source
 code: RedTurtles, CodeSyntax, Rohberg and of course KitConcept. See the Volto
 readme page for this.
 
+One of our first concerns was: how do we scale Volto? We knew our work
+landscape: multiple websites, small teams, so the "addons story" was one of the
+big first contributions that we made to the Volto project.
 -->
 
 ## Addon to an addon
