@@ -237,7 +237,7 @@ accuracy, yes, it does.
 ```
 const serializeNodes(nodes) =>
   nodes.map(node => isText(node)
-    ? <Leaf>{node.text}<Leaf>
+    ? <Leaf node={node}>{node.text}<Leaf>
     : <Element mode='view'>{serializeNodes(node.children)}</Element>);
 ```
 
@@ -382,14 +382,38 @@ TODO: insert code fragment of configuration lists
 
 ## Copy/paste of rendered volto-slate output
 
+<style>
+img { max-width: 200%; width: 200%; max-height: 200%; height: 200% }
+</style>
+![plotly](./statics/slate-elements-rendering.png)
+
+<!--
 In the rendered output of special slate elements we include special `data-`
 attributes so that when you copy rendered output and paste into slate blocks,
 we shortcut the deserialization process and we reconstruct the original special
 slate element. A rendered footnote, copy/pasted is not transformed to a simple
 link, but is rebuilt as a footnote.
+-->
 
 ## ElementEditor
 
+```
+const [installDataEntityEditor] = makeInlineElementPlugin({
+  pluginId: DATAENTITY,
+  elementType: DATAENTITY,
+  element: DataEntityElement,
+  isInlineElement: true,
+  editSchema: DataEntitySchema,
+  schemaProvider: SchemaProvider,
+  extensions: [withDataEntity],
+  hasValue: (data) => !!data.provider_url,
+  toolbarButtonIcon: collectionSVG,
+  title: 'Data entity',
+  messages,
+});
+config = installDataEntityEditor(config);
+```
+<!--
 The element editor component provides an easy to use framework to write custom
 plugins. For the "happy case", it is a factory function that only needs
 a plugin id, a node renderer component and a schema for the node editing form.
@@ -397,41 +421,64 @@ a plugin id, a node renderer component and a schema for the node editing form.
 See `volto-slate-dataentity` for a simplest example of a custom slate plugin
 that introduces a new type of 'smart' element.
 
-The ElementEditor also includes the ContextEditor toolbar, which is a toolbar
-with two buttons that automatically pops up when the cursor is in a special
-element: a button to edit the element and a button to delete the active
-element.
-
 The idea of the ElementEditor is to centralize all the repeating logic,
 abstract the slate text editing specifics so that you can focus on your
 specific element implementation. The centralization part is important,
 I'd like to refactor some parts of it to improve its performance, and this way
 we ensure we maintain compability with existing plugins.
+-->
+
+## The ContextEditor toolbar
+
+TODO: insert screenshot
+
+<!--
+The ElementEditor also includes the ContextEditor toolbar, which is a toolbar
+with two buttons that automatically pops up when the cursor is in a special
+element: a button to edit the element and a button to delete the active
+element.
+-->
 
 ## wrapInlineMarkupText
 
+TODO: insert screenshot
+
+<!--
 The benefit of implementing smart elements inside volto-slate is not only text
 composition, but also text formatting. With volto-slate it is possible to copy
 the markup styles applied to the placeholder text and apply them to the final
 rendered output, no matter if it's a simple text or compound elements such as
 a list.
+-->
 
 ## Are we there yet?
 
+- maybe. Still a lot of work
+- definitely an improvement over existing draftjs
+
+<!--
 My feeling is that there's still a ton to improve and to get to a level of
 parity with other editors. The editor is being used already by several
 projects. It is an improvement over the default draftjs editor.
+-->
 
 ## Wishlist
 
-- a complete HTML transformation story (soon to come)
-- better, more normalization rules, maybe based on typed schema
-- allow passing down a local configuration, for more specialized editors
-- refactor the ElementEditor ContextEditor implementation (persistentHelpers)
+- use HTML to store value, instead of JSON
 - Quanta toolbar
+- more normalization rules, based on a typed schema
+- pass down local configuration, for specialized editors
+- refactor the ElementEditor ContextEditor implementation
+  (persistentHelpers)
 
 ## Migration to-from volto-slate
 
-- Work has started on a Python-based html-to-json and json-to-html converters.
-- Code exists already that migrates html to slate blocks, via nodejs external
-  converter
+Exists:
+
+- html to slate blocks, via nodejs external converter
+
+Work started:
+
+- Python html-to-json and json-to-html converters.
+
+## Thanks for watching!
