@@ -52,8 +52,18 @@ style: |
 Now that you know (almost) everything you need to know about Pluggables, you
 can decide if you wish to stick around and get into the "abstract".
 
-Disclaimer: I didn't write the initial Pluggables library, it is a Volto port
-of react-slot-fill.
+It's gonna be pretty light on technical content, but heavy on personal
+impressions.
+
+Right now we have two systems running in parallel: Classic Plone and Volto and
+at first glance they appear to be nearly equivalent. I think Volto is a big
+evolutionary step for Plone and to get similar capabilities you'd basically have
+to rewrite Volto.
+
+Disclaimer: I'm gonna talk about Volto's Pluggables implementation. I am the
+author of the Volto port, but I'm not its initial author. There's many
+implementations in the React community, Wordpress Gutenberg has them as "slot
+fills". This is a port of react-fill-slot.
 -->
 
 ## Who am I?
@@ -61,6 +71,7 @@ of react-slot-fill.
 - Tiberiu Ichim
 - Zope and Plone developer since 2003
 - Eaudeweb
+- main client: EEA
 
 <!--  4 minutes
 
@@ -68,47 +79,40 @@ of react-slot-fill.
 - client is EEA, big, early
 - starting history
 - moving to Volto
+- strong CMS
 
-For those of you who don't know me, my name is Tiberiu Ichim, I'm a Plone/Volto
-developer working with Eaudeweb Romania. I'm a core Volto contributor and I've
+For those of you who don't know me, my name is Tiberiu, I'm a Plone/Volto
+developer working with Eaudeweb Romania. I'm a Volto contributor and I've
 been developing websites with Volto for about 2 years.
 
 Our main client for the Volto websites is EEA, the European Environmental Agency.
 Through our work, they are a big contributor to the Volto ecosystem and they're
 one of the so-called early adopters of Volto.
 
-I think it's important, as an anecdote, to understand the impact of Volto at
-EEA. In the autumn of 2019, at the dawn of my/our Volto history,
-I was giving a presentation to the EEA technical staff on our advantages of
-adopting Volto. It was a dry and very technical experience because I've wanted
-to put the "bad cards" on the table first, before showing something that I knew
-would get them excited: an integration with the Plotly Chart Editor, structured
-as a sort of primordial addon. And that was running on top of "old trusty Plone".
-Needless to say, they were immediately excited and saw the immense advantages
-Volto could bring to the overall architecture.
+Many of the public EEA sites are now already on Volto or in the process of
+being migrated to Volto.
 
-As a consequence, most of the public EEA Plone presence is now already on Volto
-or in the process of being migrated to Volto.
-
--->
-
-## Why do we need Pluggables?
-<!-- _class: lead invert -->
-
-<!--
-I see Pluggables as a way to provide scalability to Volto interactions and I'll
-walk you through this train of thought.
+One particularity of these websites is that the CMS side is very strong: there
+is a lot of technical content, so with our websites we focus mostly on
+delivering the tools that will be used. With Volto we've been able to make
+the process of publishing environmental data feasible for website editors and
+not just dedicated contractors.
 -->
 
 ## Addons
 
-<!-- _backgroundImage: "linear-gradient(to bottom, #67b8a3, #0228d1)" -->
+<!-- _backgroundImage: "./statics/eea-volto-gh-search.png" -->
 
-TODO: include eea-volto-gh-search.png
+![eea-addons](./statics/eea-volto-gh-search.png)
 
 <!--
-- > 80 addons
--
+- how do we scale Volto?
+- addons story was first big contribution
+- > 80 addons, all open source
+
+One of our first concerns was: how do we scale Volto? We knew our work
+landscape: multiple websites, small teams, so the "addons story" was one of the
+big first contributions that we made to the Volto project.
 
 Since then EEA has published over 80 open source Volto addons, websites, Plone
 integration addons, etc. All open in the EEA github organisations. So if you're
@@ -117,20 +121,23 @@ plenty of examples. And of course there are many companies with open source
 code: RedTurtles, CodeSyntax, Rohberg and of course KitConcept. See the Volto
 readme page for this.
 
-One of our first concerns was: how do we scale Volto? We knew our work
-landscape: multiple websites, small teams, so the "addons story" was one of the
-big first contributions that we made to the Volto project.
 -->
+
 
 ## Addon to an addon
 
-- how do you express an "add-on to an add-on"?
+- how do you express that as a pattern?
 - we need Volto's equivalent of ZCA
 
 <!--
+- we've scaled Volto with addons
+- some addons already have 3-4 addons
+- we need deeply integrated extensibility
+- volto is dev friendly, so avoid complexity
+
 So far we've scaled Volto with addons. But we're already starting to see that
 some addons need to provide extension mechanisms. volto-slate has 3 or 4 addons
-to the addon. We're always finding new ways to abuse UX with the columns block
+that extend it. We're always finding new ways to "abuse" the columns block
 or tabs block, etc.
 
 So we need a deeply integrated extensibility, just like Plone has with ZCA.
@@ -142,6 +149,15 @@ don't scare them with dependency injection or component lookup in an opaque
 registry.
 -->
 
+## Scaling up Volto interactions
+<!-- _class: lead invert -->
+
+<!--
+
+Pluggables provide a way scale up Volto interactions and I'll walk you through
+to a better understanding of this.
+-->
+
 ## React data flow
 
 - In React, data flow is top to bottom
@@ -149,8 +165,8 @@ registry.
 - how to interact with foreign components?
 
 <!--
-- A generic framework to enable pluggability and configuration "from the
-  outside".
+-  react data flow freezes components
+- that is a good thing. Concurency, debugging, 2-way databinding nono
 
 In React world the "top-bottom" approach is strict. Components pass properties
 to their children, children can call functions passed down as props. To enable
@@ -168,14 +184,15 @@ a component, writing an interface and an adaptor is the most natural thing.
 Because of this, we're pretty much guaranteed pluggability almost everywhere.
 -->
 
-## UI is not static
+## UI state is fluid
 
-The UI state is fluid
+<!-- _class: lead invert -->
 
 <!--
-The state will always change
-
-TODO: idea: it's not easy to model transient things as configuration
+The global state is always in flux, and it doesn't always model real data
+coming from the server or what not, but also the state of interactions. Trying
+to model all these transient things as configuration will be really hard and
+we'll just end up relying on a lot of documentation and lookup keys.
 -->
 
 ## Do we need pluggability?
@@ -200,7 +217,9 @@ model. With ZCA this is reduced as there are already established patterns and
 best practices.
 -->
 
-## Pluggables ~= interactive viewlets
+## Pluggables = on-demand viewlets
+
+<!-- _class: lead invert -->
 
 <!--
 Volto's pluggability needs are usually visual but also based on interactivity
@@ -209,7 +228,9 @@ Volto's pluggability needs are usually visual but also based on interactivity
 A good example of pluggable UI in Plone is the viewlet manager. You declare it
 once, you include it in the template and it will render things inside it.
 
-TODO: add ex of ZCML code paralel with Pluggable
+But this is now "viewlets for Volto". We've been doing websites with Volto, so
+obviously they're not 100% essentials. This is about going way beyond that
+traditional use case.
 -->
 
 ## `<Pluggable>` = `<browser:viewletManager>`
@@ -248,13 +269,13 @@ passing down props "out of tree" and more, as a generic framework.
 
 - Overwrite a <Plug> with a <Plug>
 
-```
+```jsx
 <Plug id="delete-button" pluggable="toolbar"><Button color="blue"></Plug>
 ```
 
 Later, render a Plug with the same id
 
-```
+```jsx
 <Plug id="delete-button" pluggable="toolbar"><Button color="red"></Plug>
 ```
 
@@ -267,6 +288,11 @@ Later, render a Plug with the same id
 
 - Read data from the <Pluggable>
 
+```jsx
+<Pluggable params={{color: 'red'}}>
+```
+
+
 <!--
 - Plugs can read data from the Pluggable. `<Pluggable params={...}>`
 -->
@@ -274,6 +300,10 @@ Later, render a Plug with the same id
 ## Interact with the pluggable!
 
 - Pass down a function from the <Pluggable>!
+
+```jsx
+<Pluggable params={{onChangeColor: (c) => setColor(c)}}>
+```
 
 ## Use cases
 
@@ -326,11 +356,9 @@ The key to understanding Pluggables is in understanding the implementation.
 <PluggablesProvider> provides a context and a state. As use effect, plugs write
 their children into that global context. Pluggables subscribe to that global
 state and render the "Plug renderers".
-
-The implementation is a Volto port of ...
 -->
 
-## Implementation (2)
+## ...
 
 The Plug
 
@@ -346,7 +374,7 @@ const Plug = ({id, children}) => {
 }
 ```
 
-## Implementation (3)
+## ...
 
 The Pluggable
 
