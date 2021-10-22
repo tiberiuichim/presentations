@@ -183,10 +183,6 @@ configurable and extendible, but we need to explicitely program and design this
 extensibility for each one of them. One example of an explicit extensibility
 mechanism is Volto's "block variations", where you have to write to a central
 registry.
-
-When programming Plone the ZCA is its most basic language. Everything is
-a component, writing an interface and an adaptor is the most natural thing.
-Because of this, we're pretty much guaranteed pluggability almost everywhere.
 -->
 
 ## UI state is fluid
@@ -202,24 +198,25 @@ we'll just end up relying on a lot of documentation and lookup keys.
 
 ## Do we need pluggability?
 
-- Pluggable = reusable, scalable
-- Pluggability is hard. Design upfront.
-- Volto blocks are extensible through dedicated API
+- Extensible = reusable, scalable
+- Extensibility is hard. Design upfront.
+- Many Volto things are extensible through dedicated API
 - How deep to go with declared configuration?
 
 <!--
-- Components can now declare "slots"
-- Replaces `<Portal>`
--
 
-Pluggability enables scalability and reuse. Because of "programmed" (via the
-configuration) pluggability, Volto blocks can be recycled: a new view template
+Extensibility enables scalability and reuse. Because of "programmed" (via the
+configuration) extensibility, Volto blocks can be recycled: a new view template
 can reuse the block data to show things in a different way, the variations can
 extend the block schema model to add new features to the block.
 
-But pluggability is also hard: it requires designing an API and a pluggability
-model. With ZCA this is reduced as there are already established patterns and
-best practices.
+But extensibility is also hard: it requires designing an API and
+a extensibility model. With ZCA this is reduced as there are already
+established patterns and best practices.
+
+When programming Plone the ZCA is its most basic language. Everything is
+a component, writing an interface and an adaptor is the most natural thing.
+Because of this, we're pretty much guaranteed pluggability almost everywhere.
 -->
 
 ## Pluggables = on-demand viewlets
@@ -429,7 +426,7 @@ const Pluggable = (name) => {
 }
 ```
 
-## Thank you!
+## Thanks for watching!
 <!-- _class: lead invert -->
 
 ## Showcase

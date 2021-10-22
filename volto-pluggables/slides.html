@@ -98,9 +98,9 @@
 ;">
 <h2>Do we need pluggability?</h2>
 <ul>
-<li>Pluggable = reusable, scalable</li>
-<li>Pluggability is hard. Design upfront.</li>
-<li>Volto blocks are extensible through dedicated API</li>
+<li>Extensible = reusable, scalable</li>
+<li>Extensibility is hard. Design upfront.</li>
+<li>Many Volto things are extensible through dedicated API</li>
 <li>How deep to go with declared configuration?</li>
 </ul>
 </section>
@@ -290,7 +290,7 @@ config.appExtras.push({<span class="hljs-attr">path</span>: <span class="hljs-st
 " class="lead invert" style="--class:lead invert;--heading-divider:2;--theme:gaia;--style:section {
 }
 ;">
-<h2>Thank you!</h2>
+<h2>Thanks for watching!</h2>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="24" data-class="invert" data-heading-divider="2" data-theme="gaia" data-style="section {
 }
@@ -380,25 +380,21 @@ This makes the components &quot;frozen&quot; in their implementation. We can mak
 configurable and extendible, but we need to explicitely program and design this
 extensibility for each one of them. One example of an explicit extensibility
 mechanism is Volto's &quot;block variations&quot;, where you have to write to a central
-registry.
-
-When programming Plone the ZCA is its most basic language. Everything is
-a component, writing an interface and an adaptor is the most natural thing.
-Because of this, we're pretty much guaranteed pluggability almost everywhere.</p></div><div class="bespoke-marp-note" data-index="7" tabindex="0"><p>The global state is always in flux, and it doesn't always model real data
+registry.</p></div><div class="bespoke-marp-note" data-index="7" tabindex="0"><p>The global state is always in flux, and it doesn't always model real data
 coming from the server or what not, but also the state of interactions. Trying
 to model all these transient things as configuration will be really hard and
-we'll just end up relying on a lot of documentation and lookup keys.</p></div><div class="bespoke-marp-note" data-index="8" tabindex="0"><p>- Components can now declare &quot;slots&quot;
-- Replaces `&lt;Portal&gt;`
--
-
-Pluggability enables scalability and reuse. Because of &quot;programmed&quot; (via the
-configuration) pluggability, Volto blocks can be recycled: a new view template
+we'll just end up relying on a lot of documentation and lookup keys.</p></div><div class="bespoke-marp-note" data-index="8" tabindex="0"><p>Extensibility enables scalability and reuse. Because of &quot;programmed&quot; (via the
+configuration) extensibility, Volto blocks can be recycled: a new view template
 can reuse the block data to show things in a different way, the variations can
 extend the block schema model to add new features to the block.
 
-But pluggability is also hard: it requires designing an API and a pluggability
-model. With ZCA this is reduced as there are already established patterns and
-best practices.</p></div><div class="bespoke-marp-note" data-index="9" tabindex="0"><p>Volto's pluggability needs are usually visual but also based on interactivity
+But extensibility is also hard: it requires designing an API and
+a extensibility model. With ZCA this is reduced as there are already
+established patterns and best practices.
+
+When programming Plone the ZCA is its most basic language. Everything is
+a component, writing an interface and an adaptor is the most natural thing.
+Because of this, we're pretty much guaranteed pluggability almost everywhere.</p></div><div class="bespoke-marp-note" data-index="9" tabindex="0"><p>Volto's pluggability needs are usually visual but also based on interactivity
 (it's an UI, after all).
 
 A good example of pluggable UI in Plone is the viewlet manager. You declare it
