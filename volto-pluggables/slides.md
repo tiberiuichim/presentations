@@ -21,12 +21,17 @@ style: |
 
   section.invert {
     --color-background: #33507a!important;
-    padding: 2em 4em !important;
+    padding: 2em 3em !important;
   }
 
   section code {
     color: #c9d1d9 !important;
     background: #161b22 !important;
+  }
+  img {
+    max-height: 80vh;
+    max-width: 100%;
+    text-align: center;
   }
 </style>
 
@@ -286,18 +291,22 @@ const OnlineFriends = (props) => {
 config.appExtras.push({path: '', component: OnlineFriends})
 ```
 
-## Advanced patterns
+##
 
-- Overwrite a <Plug> with a <Plug>
+### Overwrite a <Plug> with a <Plug>
 
 ```jsx
-<Plug id="delete-button" pluggable="toolbar"><Button color="blue"></Plug>
+<Plug id="delete-button" pluggable="toolbar">
+  <Button color="blue">
+</Plug>
 ```
 
 Later, render a Plug with the same id
 
 ```jsx
-<Plug id="delete-button" pluggable="toolbar"><Button color="red"></Plug>
+<Plug id="delete-button" pluggable="toolbar">
+  <Button color="red">
+</Plug>
 ```
 
 <!--
@@ -305,12 +314,18 @@ Later, render a Plug with the same id
   sure you keep the best one "alive" `<Plug dependencies={[...]}>`
 -->
 
-## ...
+## Read data from the <Pluggable>
 
-- Read data from the <Pluggable>
 
 ```jsx
 <Pluggable params={{color: 'red'}}>
+
+...
+
+<Plug>
+  {(options) =>
+      <Header color={options.color}>Hello!</Header>}
+</Plug>
 ```
 
 
@@ -328,7 +343,8 @@ Later, render a Plug with the same id
 ...
 
 <Plug>
-{({onChangeColor}) => <Button onClick={() => onChangeColor('red')} /> }
+{({onChangeColor}) =>
+  <Button onClick={() => onChangeColor('red')} />}
 </Plug>
 ```
 
@@ -348,6 +364,24 @@ Control their lifetime and cycle with dependencies
 
 <!--
 -->
+
+## Custom rendering of <Plug>
+
+```jsx
+<Pluggable name={name} {...rest}>
+  {(pluggables) => pluggables.map((p) => {
+    <div className="btn">{p()}</div>
+  }}
+</Pluggable>
+```
+
+## Showcase
+
+**PluggableMenuSection**:
+automatically collapsible expandable toolbar
+
+![more-menu](./statics/pluggable-more.png)
+
 
 ## Use cases
 
