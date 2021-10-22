@@ -278,11 +278,15 @@ passing down props "out of tree" and more, as a generic framework.
 ...
 
 // in an addon
-<OnlineFriends>
-  <Plug pluggable="aboveDocumentContent">
+const OnlineFriends = (props) => {
+  //...
+  return <Plug pluggable="aboveDocumentContent">
     <Message>Your friends {friends} are online!</Message>
   </Plug>
-</OnlineFriends>
+}
+
+...
+config.appExtras.push({path: '', component: OnlineFriends})
 ```
 
 ## Advanced patterns
