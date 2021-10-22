@@ -34,7 +34,7 @@ style: |
 <!-- _class: lead invert -->
 
 ## tl;dr
-<!-- _backgroundImage: "linear-gradient(to bottom, #67b8e3, #0288d1)" -->
+<!-- _backgroundImage_: "linear-gradient(to bottom, #67b8e3, #0288d1)" -->
 
 ```jsx
 
@@ -101,8 +101,13 @@ not just dedicated contractors.
 
 ## Addons
 
-<!-- _backgroundImage: "./statics/eea-volto-gh-search.png" -->
+<!-- __backgroundImage: "./statics/eea-volto-gh-search.png" -->
 
+<style>
+  img {
+    width: 60%;
+  }
+</style>
 ![eea-addons](./statics/eea-volto-gh-search.png)
 
 <!--
@@ -265,6 +270,21 @@ additional thing here". It even needs to allow inter-component communication,
 passing down props "out of tree" and more, as a generic framework.
 -->
 
+## The simple use case
+
+```jsx
+// in Volto
+<Pluggable name="aboveDocumentContent" />
+...
+
+// in an addon
+<OnlineFriends>
+  <Plug pluggable="aboveDocumentContent">
+    <Message>Your friends {friends} are online!</Message>
+  </Plug>
+</OnlineFriends>
+```
+
 ## Advanced patterns
 
 - Overwrite a <Plug> with a <Plug>
@@ -284,7 +304,7 @@ Later, render a Plug with the same id
   sure you keep the best one "alive" `<Plug dependencies={[...]}>`
 -->
 
-## Advanced patterns (2)
+## ...
 
 - Read data from the <Pluggable>
 
@@ -297,13 +317,36 @@ Later, render a Plug with the same id
 - Plugs can read data from the Pluggable. `<Pluggable params={...}>`
 -->
 
-## Interact with the pluggable!
+## Interaction child -> parent
 
 - Pass down a function from the <Pluggable>!
 
 ```jsx
 <Pluggable params={{onChangeColor: (c) => setColor(c)}}>
+
+...
+
+<Plug>
+{({onChangeColor}) => <Button onClick={() => onChangeColor('red')} /> }
+</Plug>
 ```
+
+## Keep <Plugs> alive
+
+Control their lifetime and cycle with dependencies
+
+```jsx
+  <Plug
+    pluggable={`block-toolbar-main:${block}`}
+    id="mutate-block-button-classic"
+    dependencies={[blockProps]}
+  >
+    <Button ... />
+  </Plug>
+```
+
+<!--
+-->
 
 ## Use cases
 
@@ -324,9 +367,6 @@ Later, render a Plug with the same id
   pluggable way to add controls to blocks. A guaranteed pluggable toolbar for
   blocks would enable that.
 -->
-
-## Showcase
-https://github.com/plone/volto/blob/2d8f943a8c82795b2068b58a2a7c07c56fd41d80/src/components/manage/Blocks/Block/GroupedMenuButtons.jsx
 
 ## Limitations
 
@@ -387,3 +427,7 @@ const Pluggable = (name) => {
 
 ## Thank you!
 <!-- _class: lead invert -->
+
+## Showcase
+https://github.com/plone/volto/blob/2d8f943a8c82795b2068b58a2a7c07c56fd41d80/src/components/manage/Blocks/Block/GroupedMenuButtons.jsx
+
