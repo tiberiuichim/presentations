@@ -1,7 +1,47 @@
 # Volto Slots
 
-Reuse the Volto blocks as an engine for "layout things".
+##  Problem: Volto has no viewlets
 
+Solution:
+
+```
+config.slots.asideRightSlot: {
+    title: 'Right column',
+    items: [{
+         id: 'ContextNavigation',
+         component: ContextNavigation,
+         available: restrictToPath({
+           path: '/',
+           exact: false,
+         }),
+   }]}}
+```
+
+## Problem: Volto has no portlets
+
+Solution:
+
+```
+config.slots.asideRightSlot: {
+    title: 'Right column',
+    manage: true,
+    items: []
+    }}
+```
+
+## Idea: reuse Volto blocks as portlets
+
+<!--
+Reuse the Volto blocks as an engine for "layout things".
+-->
+
+## Let's rewind
+
+* Volto has no portlets
+* Volto embraces newbies & frontend developers
+* Volto wants portlets
+
+<!--
 Context:
 
 Volto has no portlets. If you dig hard enough, you'll find a plone.restapi PR
@@ -15,7 +55,19 @@ projects. With Volto it is actually possible for someone with almost 0 Plone
 
 The portlets themselves are a great concept. Not every project needs them, but
 it's good to have them in the "arsenal".
+-->
 
+## How can we improve portlets?
+
+* Simplify configuration.
+* Volto blocks are very expressive. We can fill the gaps
+* "Modify portal content" for slots
+* UI power = more capabilities:
+  - atomic blocking of parent blocks
+  - override parent blocks
+  - remix parent with local blocks
+
+<!--
 What can we do to improve the portlet story? These are the propositions of the
 slots:
 
@@ -29,7 +81,16 @@ slots:
     - atomic blocking of inherited blocks, instead of all or nothing
     - create local copies of blocks
     - mix order of "local" and inherited blocks
+-->
 
+## How can we use them?
+
+- Sidebars: listings, info boxes, navigation, etc
+- section headers, content
+- site chrome: fat menus, footers
+- as a registry
+
+<!--
 What can we do with them?
 
 - sidebars: info boxes, navigation, etc
@@ -40,9 +101,15 @@ What can we do with them?
 - Wild scenarios, such as using the slots endpoint as a registry for site-wide
   configuration. A "TTW block designer" could use the slots to store its
   presets.
+-->
 
-Current implementation status:
+## Current status
 
-- plone.restapi PR - about
-- Volto PR
+- plone.restapi PR, > 100 commits
+  - basic functionality around 80% ready
+- Volto PR, > 260 commits
+  - basic functionality around 80% ready
 
+## Already used live!
+
+## Live demo
