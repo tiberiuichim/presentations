@@ -19,6 +19,19 @@ style: |
     color: #79c0ff !important;
   }
 
+  h2 {
+    font-family: serif;
+  }
+  section.leftbg h2 {
+    text-align: left !important;
+  }
+
+  .leftbg h2 {
+  }
+
+  section {
+    font-size: 1.6rem;
+  }
   section.invert {
     --color-background: #33507a!important;
     padding: 2em 3em !important;
@@ -39,22 +52,23 @@ style: |
 <!-- _class: lead invert -->
 
 ## tl;dr
-<!-- _backgroundImage_: "linear-gradient(to bottom, #67b8e3, #0288d1)" -->
 
 ```jsx
 
-<Pluggable name="document-top" />
+<SomeToolbar>
+  <Pluggable name="toolbar-main" />
+</SomeToolbar>
 
 //...
 
-<Plug id="quicklinks" pluggable="document-top">
+<Plug id="quicklinks" pluggable="toolbar-main">
   <Button />
 </Plug>
 
 ```
 
 <!--
-Now that you know (almost) everything you need to know about Pluggables, you
+Now that you know the basics everything you need to know about Pluggables, you
 can decide if you wish to stick around and get into the "abstract".
 
 It's gonna be pretty light on technical content, but heavy on personal
@@ -71,20 +85,24 @@ implementations in the React community, Wordpress Gutenberg has them as "slot
 fills". This is a port of react-fill-slot.
 -->
 
-## Who am I?
+## The Big Picture
 
-- Tiberiu Ichim
-- Zope and Plone developer since 2003
-- Eaudeweb
-- main client: EEA
+* EEA: early adopters
+* strategy: move to Volto
+* less brochure, more CMS
+* complex types, mixed content
+
+![bg left](https://images.unsplash.com/photo-1465188035480-cf3a60801ea5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1160&q=80)
 
 <!--  4 minutes
 
-- me
-- client is EEA, big, early
+- Tiberiu Ichim, Eaudeweb
+- Zope and Plone developer since 2003. Volto for 2 years
+- main client: EEA
 - starting history
 - moving to Volto
-- strong CMS
+- strong CMS, complex pages and types
+- a complex type requires developers
 
 For those of you who don't know me, my name is Tiberiu, I'm a Plone/Volto
 developer working with Eaudeweb Romania. I'm a Volto contributor and I've
@@ -117,12 +135,12 @@ not just dedicated contractors.
 
 <!--
 - how do we scale Volto?
-- addons story was first big contribution
+- addons infrastructure was first big contribution
 - > 80 addons, all open source
 
 One of our first concerns was: how do we scale Volto? We knew our work
-landscape: multiple websites, small teams, so the "addons story" was one of the
-big first contributions that we made to the Volto project.
+landscape: multiple websites, small teams, so the "addons infrastructure" was
+one of the big first contributions that we made to the Volto project.
 
 Since then EEA has published over 80 open source Volto addons, websites, Plone
 integration addons, etc. All open in the EEA github organisations. So if you're
@@ -134,7 +152,9 @@ readme page for this.
 -->
 
 
-## Addon to an addon
+## Addon for addon
+
+![bg left](https://images.unsplash.com/photo-1582043568223-338d62fc01fe?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1470&q=80)
 
 - how do you express that as a pattern?
 - we need Volto's equivalent of ZCA
@@ -170,9 +190,13 @@ to a better understanding of this.
 
 ## React data flow
 
-- In React, data flow is top to bottom
-- "out of tree" data needs Redux
-- how to interact with foreign components?
+<!-- _class: lead invert leftbg-->
+
+![bg left 80%](./statics/one-way-data-flow.png)
+
+* In React, data flow is top to bottom
+* "out of tree" data needs Redux
+* how to interact with foreign components?
 
 <!--
 -  react data flow freezes components
@@ -191,6 +215,8 @@ registry.
 -->
 
 ## UI state is fluid
+
+![bg](https://images.unsplash.com/photo-1600792992420-f9b02c81d4c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=714&q=80)
 
 <!-- _class: lead invert -->
 
@@ -226,6 +252,7 @@ Because of this, we're pretty much guaranteed pluggability almost everywhere.
 
 ## Pluggables = on-demand viewlets
 
+![bg blur:10px brightness:0.5 saturate:5](https://images.unsplash.com/photo-1605364850025-1c59327db3b1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80)
 <!-- _class: lead invert -->
 
 <!--
@@ -273,6 +300,9 @@ passing down props "out of tree" and more, as a generic framework.
 -->
 
 ## The simple use case
+
+![bg
+left:30%](https://images.unsplash.com/photo-1622556498246-755f44ca76f3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=928&q=80)
 
 ```jsx
 // in Volto
@@ -388,6 +418,8 @@ automatically collapsible expandable toolbar
 - Toolbars
 - The Quanta Toolbar
 
+![bg right](./statics/quanta-toolbar.png)
+
 <!--
 - Toolbars hit all the marks for Pluggables: they're highly interactive,
   dependent on context
@@ -405,8 +437,10 @@ automatically collapsible expandable toolbar
 
 ## Limitations
 
+![bg left:30%](https://images.unsplash.com/photo-1608094920984-5b54ce1bb792?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1740&q=80)
+
 - No SSR
-- Watch for dependency lists!
+- Watch out for dependency lists!
 - Limited adoption (yet)
 
 <!--
