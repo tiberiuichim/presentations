@@ -74,11 +74,11 @@ Now that we got the basics out of the way, let's see what else there is to
 learn about them.
 
 Right now we have two systems running in parallel: Classic Plone and Volto and
-at first glance they appear to be nearly equivalent. I think Volto is a big
-evolutionary step for Plone and to get similar capabilities you'd basically
-have to rewrite Volto. And Pluggables is an example of the kind of thing that
-marks the departure from the classic "static page" or "static page with some
-small interactive widget".
+at first glance they appear to be somewhat equivalent. But I think Volto is
+a big evolutionary step for Plone and to get similar capabilities you'd
+basically have to rewrite Volto. And Pluggables is an example of the kind of
+thing that marks the departure from the classic "static page" or "static page
+with JS-based interaction".
 
 Disclaimer: I'm gonna talk about Volto's Pluggables implementation. I am the
 author of the Volto port, but I'm not its initial author. There's many
@@ -95,32 +95,30 @@ fills". This is a port of https://github.com/robik/react-view-slot
 
 ![bg left](https://images.unsplash.com/photo-1465188035480-cf3a60801ea5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1160&q=80)
 
-<!--  4 minutes
-
-- Tiberiu Ichim, Eaudeweb
-- Zope and Plone developer since 2003. Volto for 2 years
-- main client: EEA
-- starting history
-- moving to Volto
-- strong CMS, complex pages and types
-- a complex type requires developers
+<!--
 
 For those of you who don't know me, my name is Tiberiu, I'm a Plone/Volto
-developer working with Eaudeweb Romania. I'm a Volto contributor and I've
-been developing websites with Volto for about 2 years.
+developer working with Eaudeweb Romania. I'm a Volto contributor and I've been
+developing websites with Volto for about 2 years.
 
-Our main client for the Volto websites is EEA, the European Environmental Agency.
-Through our work, they are a big contributor to the Volto ecosystem and they're
-one of the so-called early adopters of Volto.
+-[next]
+
+Our main client for the Volto websites is EEA, the European Environmental
+Agency. Through our work, they are a big contributor to the Volto ecosystem and
+they're one of the so-called early adopters of Volto.
+
+-[next]
 
 Many of the public EEA sites are now already on Volto or in the process of
 being migrated to Volto.
 
+-[next]
+
 One particularity of these websites is that the CMS side is very strong: there
 is a lot of technical content, so with our websites we focus mostly on
-delivering the tools that will be used. With Volto we've been able to make
-the process of publishing environmental data feasible for website editors and
-not just dedicated contractors.
+delivering the tools that will be used to produce the content. With Volto we've
+been able to make the process of publishing environmental data feasible for
+website editors and not just dedicated contractors.
 -->
 
 ## Add-ons
@@ -167,24 +165,25 @@ readme page for this.
 So far we've scaled Volto with addons. But we're already starting to see that
 some addons need to provide extension mechanisms. volto-slate has 3 or 4 addons
 that extend it. We're always finding new ways to "abuse" the columns block
-or tabs block, etc.
+or tabs block, etc. And we can't anticipate extensibility needs.
 
 So we need a deeply integrated extensibility, just like Plone has with ZCA.
 
 One of the things that make Volto really attractive is developer friendlines.
 I've seen this many many times already, new developers can become productive
 very fast with Volto. So we have to keep things light and understandable and
-don't scare them with dependency injection or component lookup in an opaque
-registry.
+don't scare them with dependency injection or complicated component lookup in
+an opaque registry.
 -->
 
 ## Scaling up Volto interactions
 <!-- _class: lead invert -->
 
+![bg](https://images.unsplash.com/photo-1534180079718-c54f5e889c4f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=776&q=80)
 <!--
 
-Pluggables provide a way scale up Volto interactions and I'll walk you through
-to a better understanding of this.
+Pluggables also provide a way scale up Volto interactions and I'll walk you
+through to a better understanding of this.
 -->
 
 ## React data flow
@@ -198,19 +197,19 @@ to a better understanding of this.
 * how to interact with foreign components?
 
 <!--
--  react data flow freezes components
-- that is a good thing. Concurency, debugging, 2-way databinding nono
-
 In React world the "top-bottom" approach is strict. Components pass properties
 to their children, children can call functions passed down as props. To enable
 communication between arbitrary component trees you need Redux (or something
 equivalent). Why? Components need to "update" when state outside them changes.
 
-This makes the components "frozen" in their implementation. We can make them
-configurable and extendible, but we need to explicitely program and design this
-extensibility for each one of them. One example of an explicit extensibility
-mechanism is Volto's "block variations", where you have to write to a central
-registry.
+This makes the components "frozen" in their implementation.
+
+-[next]
+
+We can make them configurable and extendible, but we need to explicitely
+program and design this extensibility for each one of them. One example of an
+explicit extensibility mechanism is Volto's "block variations", where you have
+to write to a central registry.
 -->
 
 ## UI state is fluid
@@ -220,9 +219,9 @@ registry.
 <!-- _class: lead invert -->
 
 <!--
-The global state is always in flux, and it doesn't always model real data
-coming from the server or what not, but also the state of interactions. Trying
-to model all these transient things as configuration will be really hard and
+The global state is always in flux, and it doesn't just model real data
+coming from the server, but also the state of interactions. Trying
+to model all these transient things as configuration would be really hard and
 we'll just end up relying on a lot of documentation and lookup keys.
 -->
 
@@ -262,7 +261,7 @@ Volto's pluggability needs are usually visual but also based on interactivity
 A good example of pluggable UI in Plone is the viewlet manager. You declare it
 once, you include it in the template and it will render things inside it.
 
-But this is now "viewlets for Volto". We've been doing websites with Volto, so
+But this is not "viewlets for Volto". We've been doing websites with Volto, so
 obviously they're not 100% essentials. This is about going way beyond that
 traditional use case.
 -->
