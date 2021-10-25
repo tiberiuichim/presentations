@@ -22,9 +22,9 @@
 ;">
 <h2>tl;dr</h2>
 <pre><code class="language-jsx"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>
-&lt;SomeToolbar&gt;
+&lt;div className=<span class="hljs-string">&quot;toolbar&quot;</span>&gt;
   <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Pluggable</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;toolbar-main&quot;</span> /&gt;</span></span>
-&lt;/SomeToolbar&gt;
+&lt;/div&gt;
 
 <span class="hljs-comment">//...</span>
 
@@ -33,6 +33,7 @@
 <span class="hljs-tag">&lt;/<span class="hljs-name">Plug</span>&gt;</span></span>
 
 </span></span></foreignObject></svg></code></pre>
+<p>Volto port of <a href="https://github.com/robik/react-view-slot">https://github.com/robik/react-view-slot</a></p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-marpit-fragments="4" data-class="invert" data-heading-divider="2" data-theme="gaia" data-style="section {
 }
@@ -54,18 +55,18 @@
 " class="invert" style="--class:invert;--heading-divider:2;--theme:gaia;--style:section {
 }
 ;">
-<h2>Addons</h2>
+<h2>Add-ons</h2>
 
 <p><img src="./statics/eea-volto-gh-search.png" alt="eea-addons" /></p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-class="invert" data-heading-divider="2" data-theme="gaia" data-style="section {
 }
 " class="invert" style="--class:invert;--heading-divider:2;--theme:gaia;--style:section {
-};--marpit-advanced-background-split:50%;" data-marpit-advanced-background="background" data-marpit-advanced-background-split="left"><div data-marpit-advanced-background-container="true" data-marpit-advanced-background-direction="horizontal"><figure style="background-image:url(&quot;https://images.unsplash.com/photo-1582043568223-338d62fc01fe?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80&quot;);"></figure></div></section></foreignObject><foreignObject width="50%" height="720" x="50%"><section id="5" data-class="invert" data-heading-divider="2" data-theme="gaia" data-style="section {
+};--marpit-advanced-background-split:40%;" data-marpit-advanced-background="background" data-marpit-advanced-background-split="left"><div data-marpit-advanced-background-container="true" data-marpit-advanced-background-direction="horizontal"><figure style="background-image:url(&quot;https://images.unsplash.com/photo-1582043568223-338d62fc01fe?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80&quot;);"></figure></div></section></foreignObject><foreignObject width="60%" height="720" x="40%"><section id="5" data-class="invert" data-heading-divider="2" data-theme="gaia" data-style="section {
 }
 " class="invert" style="--class:invert;--heading-divider:2;--theme:gaia;--style:section {
-};--marpit-advanced-background-split:50%;" data-marpit-advanced-background="content" data-marpit-advanced-background-split="left">
-<h2>Addon for addon</h2>
+};--marpit-advanced-background-split:40%;" data-marpit-advanced-background="content" data-marpit-advanced-background-split="left">
+<h2>Add-on for add-on</h2>
 
 <ul>
 <li>how do you express that as a pattern?</li>
@@ -170,7 +171,7 @@
 &lt;Pluggable name=<span class="hljs-string">&quot;aboveDocumentContent&quot;</span> /&gt;
 ...
 
-<span class="hljs-comment">// in an addon</span>
+<span class="hljs-comment">// in an add-on</span>
 <span class="hljs-keyword">const</span> OnlineFriends = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> {
   <span class="hljs-comment">//...</span>
   <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Plug</span> <span class="hljs-attr">pluggable</span>=<span class="hljs-string">&quot;aboveDocumentContent&quot;</span>&gt;</span>
@@ -224,13 +225,16 @@ config.appExtras.push({<span class="hljs-attr">path</span>: <span class="hljs-st
 <ul>
 <li>Pass down a function from the &lt;Pluggable&gt;!</li>
 </ul>
-<pre><code class="language-jsx"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>&lt;Pluggable params={{<span class="hljs-attr">onChangeColor</span>: <span class="hljs-function">(<span class="hljs-params">c</span>) =&gt;</span> setColor(c)}}&gt;
+<pre><code class="language-jsx"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>
+<span class="hljs-keyword">const</span> [color,setColor] = React.useState(<span class="hljs-string">&#x27;white&#x27;</span>);
 
-...
-
-&lt;Plug&gt;
-{<span class="hljs-function">(<span class="hljs-params">{onChangeColor}</span>) =&gt;</span>
-  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> onChangeColor(&#x27;red&#x27;)} /&gt;</span>}
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{backgroundColor:</span> <span class="hljs-attr">color</span>}}&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Pluggable</span> <span class="hljs-attr">params</span>=<span class="hljs-string">{{onChangeColor:</span> (<span class="hljs-attr">c</span>) =&gt;</span> setColor(c)}} /&gt;
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+</span></span></foreignObject></svg></code></pre>
+<pre><code><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>&lt;Plug&gt;
+{({onChangeColor}) =&gt;
+  &lt;Button onClick={() =&gt; onChangeColor('red')} /&gt;}
 &lt;/Plug&gt;
 </span></span></foreignObject></svg></code></pre>
 </section>
@@ -263,17 +267,18 @@ config.appExtras.push({<span class="hljs-attr">path</span>: <span class="hljs-st
 &lt;/Pluggable&gt;
 </span></span></foreignObject></svg></code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="19" data-class="invert" data-heading-divider="2" data-theme="gaia" data-style="section {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-class="invert" data-heading-divider="2" data-theme="gaia" data-style="section {
 }
 " class="invert" style="--class:invert;--heading-divider:2;--theme:gaia;--style:section {
+};--marpit-advanced-background-split:60%;" data-marpit-advanced-background="background" data-marpit-advanced-background-split="right"><div data-marpit-advanced-background-container="true" data-marpit-advanced-background-direction="horizontal"><figure style="background-image:url(&quot;./statics/plug-into-workflow.png&quot;);background-size:40%;"></figure></div></section></foreignObject><foreignObject width="40%" height="720"><section id="19" data-class="invert" data-heading-divider="2" data-theme="gaia" data-style="section {
 }
-;">
+" class="invert" style="--class:invert;--heading-divider:2;--theme:gaia;--style:section {
+};--marpit-advanced-background-split:60%;" data-marpit-advanced-background="content" data-marpit-advanced-background-split="right">
 <h2>Showcase</h2>
-<p><strong>PluggableMenuSection</strong>:<br />
-automatically collapsible expandable toolbar</p>
-<p><img src="./statics/pluggable-more.png" alt="more-menu" /></p>
+<p><strong>volto-workflow-progress</strong> (main toolbar plugin)</p>
+<p><strong>volto-editing-progress</strong> (&quot;sidebar&quot; for plugin)</p>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-class="invert" data-heading-divider="2" data-theme="gaia" data-style="section {
+</foreignObject><foreignObject width="1280" height="720" data-marpit-advanced-background="pseudo"><section class="invert" style="" data-marpit-advanced-background="pseudo"></section></foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section data-class="invert" data-heading-divider="2" data-theme="gaia" data-style="section {
 }
 " class="invert" style="--class:invert;--heading-divider:2;--theme:gaia;--style:section {
 };--marpit-advanced-background-split:50%;" data-marpit-advanced-background="background" data-marpit-advanced-background-split="right"><div data-marpit-advanced-background-container="true" data-marpit-advanced-background-direction="horizontal"><figure style="background-image:url(&quot;./statics/quanta-toolbar.png&quot;);"></figure></div></section></foreignObject><foreignObject width="50%" height="720"><section id="20" data-class="invert" data-heading-divider="2" data-theme="gaia" data-style="section {
@@ -357,21 +362,20 @@ automatically collapsible expandable toolbar</p>
 <h2></h2>
 </section>
 <script>!function(){"use strict";const t="marpitSVGPolyfill:setZoomFactor,",e=Symbol();let r,o;function n(n){const i="object"==typeof n&&n.target||document,a="object"==typeof n?n.zoom:n;window[e]||(Object.defineProperty(window,e,{configurable:!0,value:!0}),window.addEventListener("message",(({data:e,origin:r})=>{if(r===window.origin)try{if(e&&"string"==typeof e&&e.startsWith(t)){const[,t]=e.split(","),r=Number.parseFloat(t);Number.isNaN(r)||(o=r)}}catch(t){console.error(t)}})));let l=!1;Array.from(i.querySelectorAll("svg[data-marpit-svg]"),(t=>{var e,n,i,s;t.style.transform||(t.style.transform="translateZ(0)");const c=a||o||t.currentScale||1;r!==c&&(r=c,l=c);const d=t.getBoundingClientRect(),{length:u}=t.children;for(let r=0;r<u;r+=1){const o=t.children[r],a=o.getScreenCTM();if(a){const t=null!==(n=null===(e=o.x)||void 0===e?void 0:e.baseVal.value)&&void 0!==n?n:0,r=null!==(s=null===(i=o.y)||void 0===i?void 0:i.baseVal.value)&&void 0!==s?s:0,l=o.firstElementChild,{style:u}=l;u.transformOrigin||(u.transformOrigin=`${-t}px ${-r}px`),u.transform=`scale(${c}) matrix(${a.a}, ${a.b}, ${a.c}, ${a.d}, ${a.e-d.left}, ${a.f-d.top}) translateZ(0.0001px)`}}})),!1!==l&&Array.from(i.querySelectorAll("iframe"),(({contentWindow:e})=>{null==e||e.postMessage(`${t}${l}`,"null"===window.origin?"*":window.origin)}))}r=1,o=void 0;const i=(t,e,r)=>{if(t.getAttribute(e)!==r)return t.setAttribute(e,r),!0};function a({once:t=!1,target:e=document}={}){const r="Apple Computer, Inc."===navigator.vendor?[n]:[];let o=!t;const a=()=>{for(const t of r)t({target:e});!function(t=document){Array.from(t.querySelectorAll('svg[data-marp-fitting="svg"]'),(t=>{var e;const r=t.firstChild,o=r.firstChild,{scrollWidth:n,scrollHeight:a}=o;let l,s=1;if(t.hasAttribute("data-marp-fitting-code")&&(l=null===(e=t.parentElement)||void 0===e?void 0:e.parentElement),t.hasAttribute("data-marp-fitting-math")&&(l=t.parentElement),l){const t=getComputedStyle(l),e=Math.ceil(l.clientWidth-parseFloat(t.paddingLeft||"0")-parseFloat(t.paddingRight||"0"));e&&(s=e)}const c=Math.max(n,s),d=Math.max(a,1),u=`0 0 ${c} ${d}`;i(r,"width",`${c}`),i(r,"height",`${d}`),i(t,"preserveAspectRatio",getComputedStyle(t).getPropertyValue("--preserve-aspect-ratio")||"xMinYMin meet"),i(t,"viewBox",u)&&t.classList.toggle("__reflow__")}))}(e),o&&window.requestAnimationFrame(a)};return a(),()=>{o=!1}}const l=Symbol(),s=document.currentScript;((t=document)=>{if("undefined"==typeof window)throw new Error("Marp Core's browser script is valid only in browser context.");if(t[l])return t[l];const e=a({target:t}),r=()=>{e(),delete t[l]};Object.defineProperty(t,l,{configurable:!0,value:r})})(s?s.getRootNode():document)}();
-</script></foreignObject><foreignObject width="1280" height="720" data-marpit-advanced-background="pseudo"><section class="lead invert" style="" data-marpit-advanced-background="pseudo"></section></foreignObject></svg></div><div class="bespoke-marp-note" data-index="1" tabindex="0"><p>Now that you know the basics everything you need to know about Pluggables, you
-can decide if you wish to stick around and get into the &quot;abstract&quot;.
-
-It's gonna be pretty light on technical content, but heavy on personal
-impressions.
+</script></foreignObject><foreignObject width="1280" height="720" data-marpit-advanced-background="pseudo"><section class="lead invert" style="" data-marpit-advanced-background="pseudo"></section></foreignObject></svg></div><div class="bespoke-marp-note" data-index="1" tabindex="0"><p>Now that we got the basics out of the way, let's see what else there is to
+learn about them.
 
 Right now we have two systems running in parallel: Classic Plone and Volto and
 at first glance they appear to be nearly equivalent. I think Volto is a big
-evolutionary step for Plone and to get similar capabilities you'd basically have
-to rewrite Volto.
+evolutionary step for Plone and to get similar capabilities you'd basically
+have to rewrite Volto. And Pluggables is an example of the kind of thing that
+marks the departure from the classic &quot;static page&quot; or &quot;static page with some
+small interactive widget&quot;.
 
 Disclaimer: I'm gonna talk about Volto's Pluggables implementation. I am the
 author of the Volto port, but I'm not its initial author. There's many
 implementations in the React community, Wordpress Gutenberg has them as &quot;slot
-fills&quot;. This is a port of react-fill-slot.</p></div><div class="bespoke-marp-note" data-index="2" tabindex="0"><p>4 minutes
+fills&quot;. This is a port of https://github.com/robik/react-view-slot</p></div><div class="bespoke-marp-note" data-index="2" tabindex="0"><p>4 minutes
 
 - Tiberiu Ichim, Eaudeweb
 - Zope and Plone developer since 2003. Volto for 2 years
@@ -396,7 +400,7 @@ One particularity of these websites is that the CMS side is very strong: there
 is a lot of technical content, so with our websites we focus mostly on
 delivering the tools that will be used. With Volto we've been able to make
 the process of publishing environmental data feasible for website editors and
-not just dedicated contractors.</p></div><div class="bespoke-marp-note" data-index="3" tabindex="0"><p>__backgroundImage: &quot;./statics/eea-volto-gh-search.png&quot;</p><p>- how do we scale Volto?
+not just dedicated contractors.</p></div><div class="bespoke-marp-note" data-index="3" tabindex="0"><p>- how do we scale Volto?
 - addons infrastructure was first big contribution
 - &gt; 80 addons, all open source
 
@@ -468,7 +472,10 @@ With Volto being a SPA, the whole application state is continously shifting and
 mutating. The interactivity in Volto needs to go beyond &quot;display this
 additional thing here&quot;. It even needs to allow inter-component communication,
 passing down props &quot;out of tree&quot; and more, as a generic framework.</p></div><div class="bespoke-marp-note" data-index="13" tabindex="0"><p>- Plugs can override other plugs. Watch out for the &quot;dependencies&quot; prop to make
-  sure you keep the best one &quot;alive&quot; `&lt;Plug dependencies={[...]}&gt;`</p></div><div class="bespoke-marp-note" data-index="14" tabindex="0"><p>- Plugs can read data from the Pluggable. `&lt;Pluggable params={...}&gt;`</p></div><div class="bespoke-marp-note" data-index="16" tabindex="0"><p></p></div><div class="bespoke-marp-note" data-index="19" tabindex="0"><p>- Toolbars hit all the marks for Pluggables: they're highly interactive,
+  sure you keep the best one &quot;alive&quot; `&lt;Plug dependencies={[...]}&gt;`</p></div><div class="bespoke-marp-note" data-index="14" tabindex="0"><p>- Plugs can read data from the Pluggable. `&lt;Pluggable params={...}&gt;`</p></div><div class="bespoke-marp-note" data-index="16" tabindex="0"><p></p></div><div class="bespoke-marp-note" data-index="18" tabindex="0"><p>**PluggableMenuSection**:
+automatically collapsible expandable toolbar
+
+![more-menu](./statics/pluggable-more.png)</p></div><div class="bespoke-marp-note" data-index="19" tabindex="0"><p>- Toolbars hit all the marks for Pluggables: they're highly interactive,
   dependent on context
 
 - The Quanta toolbar: the convention is that each block has a single toolbar.

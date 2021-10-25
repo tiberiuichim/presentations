@@ -55,9 +55,9 @@ style: |
 
 ```jsx
 
-<SomeToolbar>
+<div className="toolbar">
   <Pluggable name="toolbar-main" />
-</SomeToolbar>
+</div>
 
 //...
 
@@ -67,22 +67,23 @@ style: |
 
 ```
 
-<!--
-Now that you know the basics everything you need to know about Pluggables, you
-can decide if you wish to stick around and get into the "abstract".
+Volto port of https://github.com/robik/react-view-slot
 
-It's gonna be pretty light on technical content, but heavy on personal
-impressions.
+<!--
+Now that we got the basics out of the way, let's see what else there is to
+learn about them.
 
 Right now we have two systems running in parallel: Classic Plone and Volto and
 at first glance they appear to be nearly equivalent. I think Volto is a big
-evolutionary step for Plone and to get similar capabilities you'd basically have
-to rewrite Volto.
+evolutionary step for Plone and to get similar capabilities you'd basically
+have to rewrite Volto. And Pluggables is an example of the kind of thing that
+marks the departure from the classic "static page" or "static page with some
+small interactive widget".
 
 Disclaimer: I'm gonna talk about Volto's Pluggables implementation. I am the
 author of the Volto port, but I'm not its initial author. There's many
 implementations in the React community, Wordpress Gutenberg has them as "slot
-fills". This is a port of react-fill-slot.
+fills". This is a port of https://github.com/robik/react-view-slot
 -->
 
 ## The Big Picture
@@ -122,9 +123,7 @@ the process of publishing environmental data feasible for website editors and
 not just dedicated contractors.
 -->
 
-## Addons
-
-<!-- __backgroundImage: "./statics/eea-volto-gh-search.png" -->
+## Add-ons
 
 <style>
   img {
@@ -152,9 +151,9 @@ readme page for this.
 -->
 
 
-## Addon for addon
+## Add-on for add-on
 
-![bg left](https://images.unsplash.com/photo-1582043568223-338d62fc01fe?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1470&q=80)
+![bg left:40%](https://images.unsplash.com/photo-1582043568223-338d62fc01fe?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1470&q=80)
 
 - how do you express that as a pattern?
 - we need Volto's equivalent of ZCA
@@ -310,7 +309,7 @@ left:30%](https://images.unsplash.com/photo-1622556498246-755f44ca76f3?ixid=Mnwx
 <Pluggable name="aboveDocumentContent" />
 ...
 
-// in an addon
+// in an add-on
 const OnlineFriends = (props) => {
   //...
   return <Plug pluggable="aboveDocumentContent">
@@ -369,10 +368,15 @@ Later, render a Plug with the same id
 - Pass down a function from the <Pluggable>!
 
 ```jsx
-<Pluggable params={{onChangeColor: (c) => setColor(c)}}>
 
-...
+const [color,setColor] = React.useState('white');
 
+<div style={{backgroundColor: color}}>
+  <Pluggable params={{onChangeColor: (c) => setColor(c)}} />
+</div>
+```
+
+```
 <Plug>
 {({onChangeColor}) =>
   <Button onClick={() => onChangeColor('red')} />}
@@ -408,10 +412,19 @@ Control their lifetime and cycle with dependencies
 
 ## Showcase
 
+**volto-workflow-progress** (main toolbar plugin)
+
+**volto-editing-progress** ("sidebar" for plugin)
+
+
+![bg right:60% 40%](./statics/plug-into-workflow.png)
+<!--
+
 **PluggableMenuSection**:
 automatically collapsible expandable toolbar
 
 ![more-menu](./statics/pluggable-more.png)
+-->
 
 
 ## Use cases
