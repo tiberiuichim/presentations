@@ -33,7 +33,7 @@ style: |
     font-size: 1.6rem;
   }
   section.invert {
-    --color-background: #33507a!important;
+    --color-background: #175E58!important;
     padding: 2em 3em !important;
   }
 
@@ -49,7 +49,18 @@ style: |
 </style>
 
 # Volto Pluggables
-<!-- _class: lead invert -->
+### an argument for extensibility in CMS UI
+<!-- _class: lead invert
+
+backgroundImage: linear-gradient(to bottom, #175E58, #4588d1)
+-->
+
+<!--
+I'm gonna give you a presentation on Volto Pluggables, an experimental
+technology  that ships already with Volto,
+but this is more of an argument for extensibility in CMS UI
+
+-->
 
 ## tl;dr
 
@@ -70,24 +81,28 @@ style: |
 Volto port of https://github.com/robik/react-view-slot
 
 <!--
+Tibi, Talk about the slide, look to the left!!
+
 Now that we got the basics out of the way, let's see what else there is to
 learn about them.
 
 Right now we have two systems running in parallel: Classic Plone and Volto and
-at first glance they appear to be somewhat equivalent. But I think Volto is
-a big evolutionary step for Plone and to get similar capabilities you'd
-basically have to rewrite Volto. And Pluggables is an example of the kind of
-thing that marks the departure from the classic "static page" or "static page
-with JS-based interaction".
+at first glance they appear to be somewhat equivalent.
+
+But I think Volto is a big evolutionary step for Plone and to get similar
+capabilities you'd basically have to rewrite Volto. And Pluggables is an
+example of the kind of thing that marks the departure from the classic "static
+page" or "static page with some JS-based interaction".
 
 Disclaimer: I'm gonna talk about Volto's Pluggables implementation. I am the
 author of the Volto port, but I'm not its initial author. There's many
 implementations in the React community, Wordpress Gutenberg has them as "slot
-fills". This is a port of https://github.com/robik/react-view-slot
+fills". This is a port of react-view-slot
 -->
 
 ## The Big Picture
 
+* I work with Eaudeweb Romania
 * EEA: early adopters
 * strategy: move to Volto
 * less brochure, more CMS
@@ -97,28 +112,35 @@ fills". This is a port of https://github.com/robik/react-view-slot
 
 <!--
 
-For those of you who don't know me, my name is Tiberiu, I'm a Plone/Volto
-developer working with Eaudeweb Romania. I'm a Volto contributor and I've been
-developing websites with Volto for about 2 years.
+Let's look at the big picture.
 
--[next]
+-[tibi:next]
 
-Our main client for the Volto websites is EEA, the European Environmental
-Agency. Through our work, they are a big contributor to the Volto ecosystem and
-they're one of the so-called early adopters of Volto.
+As you may know, I work with Eaudeweb Romania, our main client for the Volto
+websites is EEA, the European Environmental Agency.
 
--[next]
+-[tibi:next]
+
+We've been working with Volto for the last
+2 years and we are a big contributor to the Volto ecosystem
+and one of early adopters of Volto.
+
+-[tibi:next]
 
 Many of the public EEA sites are now already on Volto or in the process of
 being migrated to Volto.
 
--[next]
+-[tibi:next]
 
 One particularity of these websites is that the CMS side is very strong: there
-is a lot of technical content, so with our websites we focus mostly on
-delivering the tools that will be used to produce the content. With Volto we've
-been able to make the process of publishing environmental data feasible for
-website editors and not just dedicated contractors.
+is a lot of technical content. But as contractors we focus more on delivering
+the tools to produce that content.
+
+With Volto we've been able to make the process of publishing environmental data
+feasible for website editors and not just dedicated contractors.
+
+We build powerful UIs for power users and so maximize the investment of public
+money.
 -->
 
 ## Add-ons
@@ -131,20 +153,20 @@ website editors and not just dedicated contractors.
 ![eea-addons](./statics/eea-volto-gh-search.png)
 
 <!--
-- how do we scale Volto?
+- how do we scale working with Volto?
 - addons infrastructure was first big contribution
 - > 80 addons, all open source
 
-One of our first concerns was: how do we scale Volto? We knew our work
-landscape: multiple websites, small teams, so the "addons infrastructure" was
-one of the big first contributions that we made to the Volto project.
+One of our first concerns was: how do we scale working with Volto? We know our
+work landscape: multiple websites, small teams, so the "addons infrastructure"
+was one of the big first contributions that we made to the Volto project.
 
 Since then EEA has published over 80 open source Volto addons, websites, Plone
 integration addons, etc. All open in the EEA github organisations. So if you're
 looking for real examples on how to achieve something with Volto, there's
-plenty of examples. And of course there are many companies with open source
-code: RedTurtles, CodeSyntax, Rohberg and of course KitConcept. See the Volto
-readme page for this.
+plenty of that. And, you know, there are many companies with open source
+Volto code: RedTurtles, CodeSyntax, Rohberg and of course KitConcept. Check
+Volto GH readme page for this.
 
 -->
 
@@ -155,66 +177,83 @@ readme page for this.
 
 - how do you express that as a pattern?
 - we need Volto's equivalent of ZCA
+- let's keep it newbie friendly
 
 <!--
+So far we've scaled Volto with addons. But we're already starting to see that
+some addons need to provide extension mechanisms, and Volto itself needs to do
+that a lot more. volto-slate has 3 or 4 addons
+that extend it. We're always finding new ways to "abuse" the columns block
+or tabs block, etc. So we can't really anticipate extensibility needs.
+
+In short, we need deeply integrated extensibility, just like Plone has with ZCA.
+
+On the other hand.
+
+One of the things that make Volto really attractive is developer friendlines.
+I've seen this many many times already, new developers can become productive
+very fast with Volto. So we have to keep things light and understandable and
+don't scare them with things like dependency injection or complicated component
+lookup in an opaque registry.
+---
+
 - we've scaled Volto with addons
 - some addons already have 3-4 addons
 - we need deeply integrated extensibility
 - volto is dev friendly, so avoid complexity
 
-So far we've scaled Volto with addons. But we're already starting to see that
-some addons need to provide extension mechanisms. volto-slate has 3 or 4 addons
-that extend it. We're always finding new ways to "abuse" the columns block
-or tabs block, etc. And we can't anticipate extensibility needs.
-
-So we need a deeply integrated extensibility, just like Plone has with ZCA.
-
-One of the things that make Volto really attractive is developer friendlines.
-I've seen this many many times already, new developers can become productive
-very fast with Volto. So we have to keep things light and understandable and
-don't scare them with dependency injection or complicated component lookup in
-an opaque registry.
 -->
 
 ## Scaling up Volto interactions
 <!-- _class: lead invert -->
 
-![bg](https://images.unsplash.com/photo-1534180079718-c54f5e889c4f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=776&q=80)
+![bg brightness:0.5](https://images.unsplash.com/photo-1534180079718-c54f5e889c4f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=776&q=80)
 <!--
 
-Pluggables also provide a way scale up Volto interactions and I'll walk you
-through to a better understanding of this.
+The nice thing is, Pluggables also provide a way scale up Volto interactions
+and I'll walk you through to a better understanding of this.
 -->
 
 ## React data flow
 
 <!-- _class: lead invert leftbg-->
 
-![bg left 80%](./statics/one-way-data-flow.png)
+![bg left:40% 80%](./statics/pass-down-props.png)
 
 * In React, data flow is top to bottom
 * "out of tree" data needs Redux
-* how to interact with foreign components?
+* where is the protocol for ad-hoc communication between components?
 
 <!--
+-[tibi:next]
+Let's start with the basics.
+
 In React world the "top-bottom" approach is strict. Components pass properties
-to their children, children can call functions passed down as props. To enable
-communication between arbitrary component trees you need Redux (or something
-equivalent). Why? Components need to "update" when state outside them changes.
+to their children, children can call functions passed down as props.
+
+-[tibi:next]
+
+To enable communication between different component trees you need Redux,
+React Context (or something equivalent) and there is no magical solution for this.
 
 This makes the components "frozen" in their implementation.
 
--[next]
+-[tibi:next]
 
-We can make them configurable and extendible, but we need to explicitely
-program and design this extensibility for each one of them. One example of an
-explicit extensibility mechanism is Volto's "block variations", where you have
-to write to a central registry.
+So, where is the protocol for ad-hoc communication between components?
+
+
+Image from https://www.freecodecamp.org/news/how-to-update-a-components-prop-in-react-js-oh-yes-it-s-possible-f9d26f1c4c6d/
 -->
 
 ## UI state is fluid
 
-![bg](https://images.unsplash.com/photo-1600792992420-f9b02c81d4c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=714&q=80)
+- Extensible = reusable, scalable
+- Extensibility is hard. Design upfront.
+- Many Volto things are extensible through dedicated API
+- How deep to go with declared configuration?
+
+![bg right](https://images.unsplash.com/photo-1600792992420-f9b02c81d4c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=714&q=80)
 
 <!-- _class: lead invert -->
 
@@ -222,18 +261,7 @@ to write to a central registry.
 The global state is always in flux, and it doesn't just model real data
 coming from the server, but also the state of interactions. Trying
 to model all these transient things as configuration would be really hard and
-we'll just end up relying on a lot of documentation and lookup keys.
--->
-
-## Do we need pluggability?
-![bg](https://images.unsplash.com/photo-1518715058720-e56f02e77fe5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1160&q=80)
-
-- Extensible = reusable, scalable
-- Extensibility is hard. Design upfront.
-- Many Volto things are extensible through dedicated API
-- How deep to go with declared configuration?
-
-<!--
+we'll end up relying a lot on documentation and lookup keys.
 
 Extensibility enables scalability and reuse. Because of "programmed" (via the
 configuration) extensibility, Volto blocks can be recycled: a new view template
@@ -293,9 +321,10 @@ cycle all the way to the CGI and the beginning of web apps. Request, response,
 rinse, repeat.
 
 With Volto being a SPA, the whole application state is continously shifting and
-mutating. The interactivity in Volto needs to go beyond "display this
-additional thing here". It even needs to allow inter-component communication,
-passing down props "out of tree" and more, as a generic framework.
+mutating. To repeat again, the interactivity in Volto needs to go beyond
+"display this additional thing here". It even needs to allow inter-component
+communication, passing down props "out of tree" and more, as a generic
+framework.
 -->
 
 ## The simple use case
@@ -311,14 +340,25 @@ left:30%](https://images.unsplash.com/photo-1622556498246-755f44ca76f3?ixid=Mnwx
 // in an add-on
 const OnlineFriends = (props) => {
   //...
-  return <Plug pluggable="aboveDocumentContent">
-    <Message>Your friends {friends} are online!</Message>
-  </Plug>
+  return (
+    <Plug pluggable="aboveDocumentContent" order={100}>
+      <Message>Your friends {friends} are online!</Message>
+    </Plug>
+  )
 }
 
 ...
 config.appExtras.push({path: '', component: OnlineFriends})
 ```
+
+<!--
+In principle this could have been done with just the Portal ReacDOM component.
+
+...
+
+and the only thing we have to is to make sure that our <Plug> component
+renders at some point (when appropriate).
+-->
 
 ##
 
@@ -375,7 +415,7 @@ const [color,setColor] = React.useState('white');
 </div>
 ```
 
-```
+```jsx
 <Plug>
 {({onChangeColor}) =>
   <Button onClick={() => onChangeColor('red')} />}
@@ -461,7 +501,7 @@ Pluggables are not SSR-enabled. Is this a problem? Not really. Slots are an
 alternative and the plan is to make slots pluggables-enabled.
 -->
 
-## Implementation (simplified)
+## Implementation (pseudocode)
 
 The context
 
@@ -508,7 +548,6 @@ const Pluggable = (name) => {
 ```
 
 ##
-<!-- _class: lead invert -->
 
 ![bg](https://images.unsplash.com/photo-1526614180703-827d23e7c8f2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80)
 
