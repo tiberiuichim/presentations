@@ -228,6 +228,7 @@ we'll just end up relying on a lot of documentation and lookup keys.
 -->
 
 ## Do we need pluggability?
+![bg](https://images.unsplash.com/photo-1518715058720-e56f02e77fe5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1160&q=80)
 
 - Extensible = reusable, scalable
 - Extensibility is hard. Design upfront.
@@ -494,9 +495,12 @@ const Pluggable = (name) => {
 }
 ```
 
-## Thanks for watching!
+##
 <!-- _class: lead invert -->
 
+![bg](https://images.unsplash.com/photo-1526614180703-827d23e7c8f2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80)
+
+<!--
 ## Showcase
 https://github.com/plone/volto/blob/2d8f943a8c82795b2068b58a2a7c07c56fd41d80/src/components/manage/Blocks/Block/GroupedMenuButtons.jsx
-
+-->
