@@ -26,6 +26,7 @@ style: |
   img {
     max-height: 80vh;
     max-width: 100%;
+    height: unset !important;
     text-align: center;
   }
   h2 {
@@ -86,13 +87,11 @@ It's boring, just like a text editor should be.
 
 ## History
 
+<!-- backgroundImage: url(./statics/bise.png) -->
+<!-- backgroundPosition: bottom -->
+<!-- backgroundSize: auto -->
+
 - the need to create templated richtext documents
-
-<style>
-img { max-width: 70%!important }
-</style>
-
-![plotly](./statics/bise.png)
 
 <!--
 - in winter 2019-2020 we were working on forest.eea.europa.eu and the mockup
@@ -120,12 +119,21 @@ img { max-width: 70%!important }
 
 # volto-slate ecosystem
 
+<!-- backgroundImage: none -->
+
 <!-- _class: lead invert -->
 
 ## volto-slate-dataentity
 
 ![plotly](./statics/dataentity.png)
+
+## volto-slate-dataentity
 ![plotly](./statics/dataentity-editor.png)
+<style>
+img {
+  width: unset !important
+}
+</style>
 
 <!--
 slate-dataentity replaces placeholder text with values coming from database.
@@ -136,6 +144,8 @@ it's country name, etc)
 ## volto-slate-zotero
 
 ![plotly](./statics/zotero.png)
+
+## volto-slate-zotero
 ![plotly](./statics/zotero-editor.png)
 
 ## & more
@@ -190,6 +200,12 @@ with it.
 
 ## Slate JSON data structure
 
+<style>
+img {
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+</style>
 
 ![plotly](./statics/plonefoundation-slate-tree.png)
 
@@ -215,8 +231,6 @@ Because is this
 <strong><a>I'm bold</a></strong>
 ```
 
-or
-
 ```
 <a><strong>I'm bold</strong></a>
 ```
@@ -226,10 +240,16 @@ Does it matter? For styling purposes and
 accuracy, yes, it does.
 -->
 
-## What is an element?
+## Slate elements
 
 ```
-{type: 'a', children: [{text: "I'm bold"}]}
+{type: 'a', children: [{text: "I'm bold"}], data: {url: "http:..."}}
+```
+
+```
+config.settings.slate.elements.a = \
+  ({ children, element }) =>
+    <a href={element.data.url}>{children}</a>
 ```
 
 ## volto-slate output rendering
