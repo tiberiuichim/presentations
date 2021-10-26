@@ -56,18 +56,24 @@ style: |
 
 ![bg right:40%](./statics/bise-full.png)
 
-* developed for
+* Volto add-on developed for
   [Biodiversity Information System for Europe](https://biodiversity.europa.eu)
-* the most important addon right now
+* the most important add-on right now
 * a richtext editor is uncool
 * the first time Plone owns an editor?
 
 <!--
+-[tibi:next]
+
 I'm the original lead developer for volto-slate, it was developed as part of
 the BISE project for EEA.
 
+-[tibi:next]
+
 Probably the most important Volto addon, right now. If you start a new Plone
 6 Volto project, it is one addon that you should include in your project.
+
+-[tibi:next]
 
 Nobody wants to think about the editor. We mostly take them for granted. But
 volto-slate is probably not even the fifth in line of Plone richtext editors
@@ -75,6 +81,8 @@ volto-slate is probably not even the fifth in line of Plone richtext editors
 
 Requirements change, the web changes, etc. And if I'd have time today, I might
 even start another volto-slate alternative.
+
+-[tibi:next]
 
 But right now it is the first time the Plone community owns an editor and
 that is important and the consequences of that are far-reaching.
@@ -109,18 +117,18 @@ It's boring, just like a text editor should be.
 
 ![bg 50%](./statics/bise.png)
 
-Create templated richtext documents?
+* Create templated richtext documents?
+* The parent of Volto Addons infrastructure
 
 <!--
+[tibi:next]
+
 - In my first Volto project, while working for forest.eea.europa.eu, we knew
   that we were going to have "factsheet pages", text that intermixed
-  description with numbers coming from the database. We were also in a position
-  where it wasn't clear, from the business point of view, what the final output
-  would be, so I've had an idea to create a framework for "live documents", to
-  make Volto as flexible as possible, so when the day comes, producing the
-  final output will not be my job, as a programmer, but that of the site
-  editors. Basically, we needed narative text for hard numbers coming from
-  a database, and that text was out of my control.
+  description with numbers coming from the database. Basically, we needed
+  narative text for hard numbers coming from a database, and due to project
+  constraints, we wanted to completely delegate the task of editing that text
+  to the website editors.
 
   I've started working on new draftjs plugins, but I was having problems
   (components were not refreshing, draftjs API was bad) not a positive one
@@ -131,10 +139,13 @@ Create templated richtext documents?
   deal only with draftjs, but also differences and bugs in redraft, another
   library that can take draftjs trees and render them.
 
+[tibi:next]
+
   Around spring 2020 we've started to draft the addon infrastructure, so I had
   the idea of creating an addon from scratch, to understand the needs of that
   addon infrastructure. As I've already wanted to test-drive slate, I've
   started to make a "toy addon", the volto-slate.
+
 -->
 
 # volto-slate ecosystem
@@ -189,6 +200,26 @@ developers.
 https://github.com/ianstormtaylor/slate/pull/4518
 -->
 
+##
+
+![slate 20%](./statics/slate-insertelement.png)
+![bg right](./statics/draft-dataentity.png)
+
+<!--
+Now, this is a a way comparing apples to orranges, but there's a certain
+simplicity in working with Slate API. In many cases you can even omit the
+target nodes where you want to apply an operation, and slate just takes the
+active selected node of that editor.
+
+One particular aspect that I enjoy of working with slate is the references API:
+you can "save" a pointer to a selection or a node path, mutate the editor
+content and have that pointer kept up to date with the "new" address.
+
+On the left is the "insert element" logic in volto-slate, while on the right is
+a somewhat equivalent code that I've developed for the dataentity draftjs
+version.
+-->
+
 ## Slate gets ❤ from the industry
 
 ![bg 30%](./statics/spyder-tiny.png)
@@ -199,20 +230,24 @@ https://github.com/ianstormtaylor/slate/pull/4518
 * there's 0 knowledge about HTML in slate
 * volto-slate builds an "HTML + more" editor
 
-
 <!--
 
+[tibi:next]
 The key to understanding exactly what volto-slate is lies in understanding the
 underlying library, SlateJS. SlateJS is not an editor, it is a framework to
 build rich text editor. What types of elements, how they are rendered, etc,
 nothing like that is defined in any of the slatejs packages.
 
+[tibi:next]
 With volto-slate we're trying to build a superset of an HTML-compatible
-richtext editor. Why HTML compatible? Even if it's complex and we'd rather deal
+richtext editor. Why HTML compatible?
+
+[tibi:next]
+Even if it's complex and we'd rather deal
 with semantically marked up elements, being so ubiquitous,
 interoperability will never be a problem. You will find libraries and tools to
 handle it, and external systems (indexing, etc) are usually equiped to deal
-with it.
+with it. So the end goal is to also provide HTML markup, in addition to JSON.
 -->
 
 ## Slate JSON data structure
@@ -225,7 +260,7 @@ with it.
 Unlike other modern editors that use the concept of "marks" for decorative
 tags (strong, em, etc), volto-slate always uses "hard" Element nodes. Initially
 we've gone the 'marks' route as well, but switched when we've realized that
-when ingesting HTML, there's no way to render identical markup similar to the
+when ingesting HTML, there's no way to render markup similar to the
 source. Example (pseudocode):
 
 -->
@@ -303,7 +338,7 @@ and much, much more
 
 With volto-slate we've tried to anticipate the editor workflow, as they're used
 to modern web editors. The quality of those web apps is extremely high and so
-those expections are reflected also to interactions with Volto. The Volto
+those expections reflect to interactions with Volto. The Volto
 blocks presented a challenge, but the basic rule is obvious: one paragraph per
 block, Volto provides separate blocks for things like images and tables.
 
@@ -354,7 +389,7 @@ block.
 
 Two modes:
   - single paragraph editor
-  - detached
+  - detached (multi-paragraph, no Volto-blocks integration)
 
 <!--
 It works in two modes "detached" and "one paragraph per block". The detached
@@ -523,20 +558,27 @@ a list.
 
 <!--
 My feeling is that there's still a ton to improve and to get to a level of
-parity with other editors. The editor is being used already by several
-projects. It is an improvement over the default draftjs editor.
+parity with other editors. We're always unsurfacing a lot of edge cases, but
+the editor is being used already by several
+projects.
+
+It is an improvement over the default draftjs editor.
+
+https://medium.engineering/why-contenteditable-is-terrible-122d8a40e480
 -->
 
 ## Wishlist
 
 ![bg right](https://images.unsplash.com/photo-1583513702411-9dade5d3cb12?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=776&q=80)
 
-- store value as HTML, instead of JSON
+- also store value as HTML, or have block transformer to also have HTML in the
+  backend
 - Quanta toolbar
 - more normalization rules, based on a typed schema
 - pass down local configuration, for specialized editors
-- refactor the ElementEditor ContextEditor implementation
+- improve the ElementEditor ContextEditor implementation
   (persistentHelpers)
+- more detached mode (tables editing in slate, images, etc)
 
 ## Migration to-from volto-slate
 
@@ -544,15 +586,18 @@ projects. It is an improvement over the default draftjs editor.
 
 ### HTML → Slate
 
-- via Nodejs external converter
-- via Python (in work, eea.volto.slate)
+- External [plone/block-conversion-tool](https://github.com/plone/blocks-conversion-tool)
+- Python (in work, eea.volto.slate)
 
-### Slate → HTML
+### Slate ⇔ HTML
 
-- via Python (in work, eea.volto.slate)
+- Python (in work, eea.volto.slate)
 
 ### DraftJS ⇔ SlateJS
 
-- Needs a hop via HTML
+- External [plone/block-conversion-tool](https://github.com/plone/blocks-conversion-tool)
 
 ## Thanks for watching!
+
+![bg
+100%](https://images.unsplash.com/photo-1603247590370-53a889ef6f55?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80)
