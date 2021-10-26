@@ -14,8 +14,21 @@ style: |
     color: #79c0ff !important;
   }
 
+  h2 {
+    font-family: serif;
+  }
+  section.leftbg h2 {
+    text-align: left !important;
+  }
+
+  .leftbg h2 {
+  }
+
+  section {
+    font-size: 1.6rem;
+  }
   section.invert {
-    --color-background: #3f574d!important;
+    --color-background: #175E58!important;
     padding: 2em 3em !important;
   }
 
@@ -26,22 +39,22 @@ style: |
   img {
     max-height: 80vh;
     max-width: 100%;
-    height: unset !important;
     text-align: center;
-  }
-  h2 {
-    font-family: serif;
   }
 </style>
 
 # volto-slate
 <!-- _class: lead invert -->
 
+<!-- backgroundImage: linear-gradient(to bottom, #4A5B68, #175E58) -->
+
 #### Tiberiu Ichim
 ##### Eau de Web
 
 
-## Before we begin
+## What is volto-slate?
+
+![bg right:40%](./statics/bise-full.png)
 
 * developed for
   [Biodiversity Information System for Europe](https://biodiversity.europa.eu)
@@ -53,8 +66,8 @@ style: |
 I'm the original lead developer for volto-slate, it was developed as part of
 the BISE project for EEA.
 
-Probably the most important Volto addon, right now. If you start a new Volto
-project, it is one addon that you should include in your project.
+Probably the most important Volto addon, right now. If you start a new Plone
+6 Volto project, it is one addon that you should include in your project.
 
 Nobody wants to think about the editor. We mostly take them for granted. But
 volto-slate is probably not even the fifth in line of Plone richtext editors
@@ -63,13 +76,13 @@ volto-slate is probably not even the fifth in line of Plone richtext editors
 Requirements change, the web changes, etc. And if I'd have time today, I might
 even start another volto-slate alternative.
 
-But at this moment, it is the first time the Plone community owns an editor and
+But right now it is the first time the Plone community owns an editor and
 that is important and the consequences of that are far-reaching.
 -->
 
 ## volto slate demo
 
-* Boring, but that's good
+* Almost boring, but that's good
 
 <!--
 It's boring, just like a text editor should be.
@@ -85,22 +98,29 @@ It's boring, just like a text editor should be.
 * Plone Foundation (2021.ploneconf.org)
 * Kitconcept, Rohberg and others
 
+## Top active developers & devops
+
+- Silviu Bogan
+- Alin Voinea
+- Valentina Balan
+- Tiberiu Ichim
+
 ## History
 
-<!-- backgroundImage: url(./statics/bise.png) -->
-<!-- backgroundPosition: bottom -->
-<!-- backgroundSize: auto -->
+![bg 50%](./statics/bise.png)
 
-- the need to create templated richtext documents
+Create templated richtext documents?
 
 <!--
-- in winter 2019-2020 we were working on forest.eea.europa.eu and the mockup
-  included text that intermixed description with numbers coming from the
-  database. We were also in a position where it wasn't clear, from the business
-  point of view, what the final output would be, so I've had an idea to create
-  a framework for "live documents", to make Volto as flexible as possible, so
-  when the day comes, producing the final output will not be my job, as
-  a programmer, but that of the site editors.
+- In my first Volto project, while working for forest.eea.europa.eu, we knew
+  that we were going to have "factsheet pages", text that intermixed
+  description with numbers coming from the database. We were also in a position
+  where it wasn't clear, from the business point of view, what the final output
+  would be, so I've had an idea to create a framework for "live documents", to
+  make Volto as flexible as possible, so when the day comes, producing the
+  final output will not be my job, as a programmer, but that of the site
+  editors. Basically, we needed narative text for hard numbers coming from
+  a database, and that text was out of my control.
 
   I've started working on new draftjs plugins, but I was having problems
   (components were not refreshing, draftjs API was bad) not a positive one
@@ -119,21 +139,16 @@ It's boring, just like a text editor should be.
 
 # volto-slate ecosystem
 
-<!-- backgroundImage: none -->
+<!-- backgroundImage: linear-gradient(to bottom, #4A5B68, #175E58) -->
 
 <!-- _class: lead invert -->
 
 ## volto-slate-dataentity
 
-![plotly](./statics/dataentity.png)
+![bg 50%](./statics/dataentity.png)
 
 ## volto-slate-dataentity
-![plotly](./statics/dataentity-editor.png)
-<style>
-img {
-  width: unset !important
-}
-</style>
+![bg 20%](./statics/dataentity-editor.png)
 
 <!--
 slate-dataentity replaces placeholder text with values coming from database.
@@ -154,12 +169,14 @@ it's country name, etc)
 - volto-slate-footnote
 - volto-slate-metadata-mentions
 
+![bg right 50%](./statics/metadata-mentions.png)
+
 <!--
 https://biodiversity.europa.eu/countries/cyprus/edit
 https://alin.dev2aws.eea.europa.eu/ims/test-alin-metadata-section/edit#ref-B6f3w
 -->
 
-## Rough comparison draftjs vs slate
+## SlateJs vs DraftJS
 
 - Slatejs is backed by a grassroots open source community
 - Draftjs is OS project from Facebook
@@ -172,20 +189,20 @@ developers.
 https://github.com/ianstormtaylor/slate/pull/4518
 -->
 
-##
+## Slate gets ❤ from the industry
 
-![plotly](./statics/spyder-tiny.png)
+![bg 30%](./statics/spyder-tiny.png)
 
 ## Understanding SlateJS
 
-* SlateJs is a framework, not an editor
-* there's no knowledge about HTML in slate
-* volto-slate builds an HTML "superset" editor
+* SlateJs is a low-level library, not an editor
+* there's 0 knowledge about HTML in slate
+* volto-slate builds an "HTML + more" editor
 
 
 <!--
 
-The key to understanding exactly what volto-slate means is understanding the
+The key to understanding exactly what volto-slate is lies in understanding the
 underlying library, SlateJS. SlateJS is not an editor, it is a framework to
 build rich text editor. What types of elements, how they are rendered, etc,
 nothing like that is defined in any of the slatejs packages.
@@ -199,13 +216,6 @@ with it.
 -->
 
 ## Slate JSON data structure
-
-<style>
-img {
-  max-width: 100% !important;
-  max-height: 100% !important;
-}
-</style>
 
 ![plotly](./statics/plonefoundation-slate-tree.png)
 
@@ -221,17 +231,17 @@ source. Example (pseudocode):
 -->
 
 No, we don't do this:
-```
+```js
 {type: 'a', marks: ['strong']}
 ```
 
-Because is this
+Because which one is it?
 
-```
+```html
 <strong><a>I'm bold</a></strong>
 ```
 
-```
+```html
 <a><strong>I'm bold</strong></a>
 ```
 
@@ -242,7 +252,7 @@ accuracy, yes, it does.
 
 ## Slate elements
 
-```
+```jsx
 {type: 'a', children: [{text: "I'm bold"}], data: {url: "http:..."}}
 ```
 
@@ -254,7 +264,7 @@ config.settings.slate.elements.a = \
 
 ## volto-slate output rendering
 
-```
+```jsx
 const serializeNodes(nodes) =>
   nodes.map(node => isText(node)
     ? <Leaf node={node}>{node.text}<Leaf>
@@ -268,7 +278,7 @@ that just outputs React components and their children. (pseudocode)
 
 ## Rendering to HTML
 
-```
+```jsx
 ReactDOM.renderToStaticMarkup(serializeNodes(nodes))
 ```
 
@@ -282,8 +292,10 @@ React. To convert to real HTML, in the HTML-saving widget, we also use React.
 
 - hit <Enter> in a text block will split text in two...
 - unless you're in a list
+- unless you're in a list but you make a headline
 - <Backspace> at the beginning of a line joins it with the previous block
 - traverse the blocks with up/down keys
+- click focuses block
 
 and much, much more
 
@@ -294,13 +306,15 @@ to modern web editors. The quality of those web apps is extremely high and so
 those expections are reflected also to interactions with Volto. The Volto
 blocks presented a challenge, but the basic rule is obvious: one paragraph per
 block, Volto provides separate blocks for things like images and tables.
+
+do demo for traversing, sublists, etc
 -->
 
 ## volto-slate takes over Volto
 
 - paste HTML, you get multiple blocks
 - pasted images are uploaded & converted to Volto image blocks
-- pasted Google Spreadsheets are converto to Volto table blocks
+- pasted Google Spreadsheets are converted to Volto table blocks
 - serves as target for drag/drop images from system
 
 
@@ -336,11 +350,11 @@ Volto blocks and then splits the multiple top-level nodes, each to a separate
 block.
 -->
 
-## The text block
+## The Volto text block
 
 Two modes:
-  - detached
   - single paragraph editor
+  - detached
 
 <!--
 It works in two modes "detached" and "one paragraph per block". The detached
@@ -354,7 +368,39 @@ grid.
 Multiple tiered levels:
 
 - basic text editor (SlateEditor): `config.settings.slate`
-- text block (TextBlockEdit): `config.settings.textBlock*`
+- text block (TextBlockEdit): `config.settings.slate.textblock*`
+
+##
+
+```jsx
+    textblockKeyboardHandlers: {
+      Backspace: [
+        unwrapEmptyString,
+        backspaceInList, // Backspace in list item lifts node and breaks Volto blocks
+        joinWithPreviousBlock, // Backspace at beginning of block joins with previous block
+      ],
+      Delete: [
+        unwrapEmptyString,
+        joinWithNextBlock, // Delete at end of block joins with next block
+      ],
+      Enter: [
+        unwrapEmptyString,
+        softBreak, // Handles shift+Enter as a newline (<br/>)
+      ],
+      ArrowUp: [
+        moveListItemUp, // Move up a list with with Ctrl+up
+        goUp, // Select previous block
+      ],
+      ArrowDown: [
+        moveListItemDown, // Move down a list item with Ctrl+down
+        goDown, // Select next block
+      ],
+      Tab: [
+        indentListItems, // <tab> and <c-tab> behaviour for list items
+        traverseBlocks,
+      ],
+    },
+```
 
 ## Extending and configuration
 
@@ -402,9 +448,6 @@ TODO: insert code fragment of configuration lists
 
 ## Copy/paste of rendered volto-slate output
 
-<style>
-img { max-width: 200%; width: 200%; max-height: 200%; height: 200% }
-</style>
 ![plotly](./statics/slate-elements-rendering.png)
 
 <!--
@@ -417,7 +460,7 @@ link, but is rebuilt as a footnote.
 
 ## ElementEditor
 
-```
+```jsx
 const [installDataEntityEditor] = makeInlineElementPlugin({
   pluginId: DATAENTITY,
   elementType: DATAENTITY,
@@ -450,7 +493,7 @@ we ensure we maintain compability with existing plugins.
 
 ## The ContextEditor toolbar
 
-TODO: insert screenshot
+![bg 70%](./statics/persistent-helpers.png)
 
 <!--
 The ElementEditor also includes the ContextEditor toolbar, which is a toolbar
@@ -461,7 +504,7 @@ element.
 
 ## wrapInlineMarkupText
 
-TODO: insert screenshot
+![bg 70%](./statics/render-inline-markup.png)
 
 <!--
 The benefit of implementing smart elements inside volto-slate is not only text
@@ -473,8 +516,10 @@ a list.
 
 ## Are we there yet?
 
-- maybe. Still a lot of work
+- almost. Still a lot of work
 - definitely an improvement over existing draftjs
+
+![bg brightness:0.5](https://images.unsplash.com/photo-1532009877282-3340270e0529?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80)
 
 <!--
 My feeling is that there's still a ton to improve and to get to a level of
@@ -484,7 +529,9 @@ projects. It is an improvement over the default draftjs editor.
 
 ## Wishlist
 
-- use HTML to store value, instead of JSON
+![bg right](https://images.unsplash.com/photo-1583513702411-9dade5d3cb12?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=776&q=80)
+
+- store value as HTML, instead of JSON
 - Quanta toolbar
 - more normalization rules, based on a typed schema
 - pass down local configuration, for specialized editors
@@ -493,12 +540,19 @@ projects. It is an improvement over the default draftjs editor.
 
 ## Migration to-from volto-slate
 
-Exists:
+![bg left:30%](https://images.unsplash.com/photo-1564101160531-4838e8a5f4e7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80)
 
-- html to slate blocks, via nodejs external converter
+### HTML → Slate
 
-Work started:
+- via Nodejs external converter
+- via Python (in work, eea.volto.slate)
 
-- Python html-to-json and json-to-html converters.
+### Slate → HTML
+
+- via Python (in work, eea.volto.slate)
+
+### DraftJS ⇔ SlateJS
+
+- Needs a hop via HTML
 
 ## Thanks for watching!
