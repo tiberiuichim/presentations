@@ -51,6 +51,10 @@ style: |
 #### Tiberiu Ichim
 ##### Eau de Web
 
+<!--
+So, let's start with the elefant in the room: I'm a vim user talking about how
+I've built a non-vim text editor.
+-->
 
 ## What is volto-slate?
 
@@ -60,7 +64,7 @@ style: |
   [Biodiversity Information System for Europe](https://biodiversity.europa.eu)
 * the most important add-on right now
 * a richtext editor is uncool
-* the first time Plone owns an editor?
+* we own this editor and that is important
 
 <!--
 -[tibi:next]
@@ -88,16 +92,32 @@ But right now it is the first time the Plone community owns an editor and
 that is important and the consequences of that are far-reaching.
 -->
 
-## volto slate demo
+## demo time
 
-* Almost boring, but that's good
+<!-- _class: lead invert -->
 
 <!--
 It's boring, just like a text editor should be.
 
+* Almost boring, but that's good
+
 - Show off the style menu
 - Show off editing data entities
 - Show off editing footnotes, zotero
+-->
+
+## Top active developers & devops
+
+- Silviu Bogan
+- Alin Voinea
+- Valentina Balan
+- Tiberiu Ichim
+- any many others
+
+<!--
+I'll mention these guys as primary contributors to volto-slate,
+as they deserve recognition for their work on this important piece of
+infrastructure
 -->
 
 ## Used by...
@@ -106,19 +126,12 @@ It's boring, just like a text editor should be.
 * Plone Foundation (2021.ploneconf.org)
 * Kitconcept, Rohberg and others
 
-## Top active developers & devops
-
-- Silviu Bogan
-- Alin Voinea
-- Valentina Balan
-- Tiberiu Ichim
-
 ## History
 
 ![bg 50%](./statics/bise.png)
 
 * Create templated richtext documents?
-* The parent of Volto Addons infrastructure
+* Major contributor to the Volto Add-ons Infrastructure
 
 <!--
 [tibi:next]
@@ -244,10 +257,11 @@ richtext editor. Why HTML compatible?
 
 [tibi:next]
 Even if it's complex and we'd rather deal
-with semantically marked up elements, being so ubiquitous,
+with semantically marked up elements, being so common,
 interoperability will never be a problem. You will find libraries and tools to
-handle it, and external systems (indexing, etc) are usually equiped to deal
-with it. So the end goal is to also provide HTML markup, in addition to JSON.
+handle it, and external systems (search engine indexing, etc) are usually
+equiped to deal with it. So at some point in the near future we should strive
+to also have, in the database, the serialized HTML markup
 -->
 
 ## Slate JSON data structure
@@ -293,9 +307,19 @@ accuracy, yes, it does.
 
 ```
 config.settings.slate.elements.a = \
-  ({ children, element }) =>
+  ({ children, element, mode='edit' }) =>
     <a href={element.data.url}>{children}</a>
 ```
+
+<!-- So this is the JSON tree for a link element, you can see that it's
+a simple object with a list of children and some data.
+
+The text is always a text node.
+
+And to render it, is easy: you just need to provide a React component. And you
+can even render the component differently, depending on if it's in view or edit
+mode.
+-->
 
 ## volto-slate output rendering
 
@@ -553,6 +577,8 @@ a list.
 
 - almost. Still a lot of work
 - definitely an improvement over existing draftjs
+- we need a written specification
+- and a ton more tests
 
 ![bg brightness:0.5](https://images.unsplash.com/photo-1532009877282-3340270e0529?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80)
 
