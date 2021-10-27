@@ -74,7 +74,7 @@ config.slots.asideRightSlot: {
 
 ## Volto has no portlets
 
-![bg brightness:0.6](https://images.unsplash.com/photo-1611329857570-f02f340e7378?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80)
+![bg brightness:0.6](https://images.unsplash.com/photo-1493063446996-5368fa274032?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1740&q=80)
 
 <!-- Problem -->
 <!-- _class: lead invert -->
@@ -113,11 +113,7 @@ Notice the "manage:true"
 <!-- _class: lead invert -->
 
 <!--
-Now, I'm not gonna defend one website design over another. As much as I like to
-get myself involved in everything, I have to admit I'm not a designer. I'm
-actually a backend developer who invaded the frontend domain.
-
-Back in 2003-2004 when I've started working with Zope and Plone, I was working
+Back in 2003 when I've started with Zope and Plone, I was working
 with my wife for an NGO and in those days, Plone was almost the final face of
 our websites. You could just take default Plone, tweak the styling, add a logo,
 add a few specific portlets, like newsletter signup, news, whatever and call it
@@ -137,11 +133,16 @@ you need to dump at least 100k just to get the basics running?
 I hope with Erico's recent work and Volto's seamless mode we might get to
 a place where we can look at Volto and have it be almost be a final product.
 There is certainly a sweet spot between Gutenberg's full page layout
-customizability and Plone's strong classic CMS roots, somewhere where Volto can
+editing and Plone's strong classic CMS roots, somewhere where Volto can
 be positioned. And I'm extremely grateful to all the guys at Kitconcept and
 those that worked on Volto so far, for placing UX and user friendliness as
-a top priority. It is a continuation of Alex Limi's work and it's staying true
-to the core Plone traits and values.
+a top priority. It is a continuation of Alex Limi's vision and work and it's
+staying true to the core Plone traits and values.
+
+----
+NUUU: Now, I'm not gonna defend one website design over another. As much as I like to
+get myself involved in everything, I have to admit I'm not a designer. I'm
+actually a backend developer who invaded the frontend domain.
 
 -->
 
@@ -152,7 +153,7 @@ to the core Plone traits and values.
 <!--
 Thinking back to Nicola's Sustainable Web presentation, you know, we've used
 the same office computers for many years, but when we started to work with
-Volto we've had to upgrade all computers, just to keep with up webpack bundling
+Volto we've had to upgrade all computers, just to keep up with webpack bundling
 speeds. Yes, we are the developed world, but are we building a product that is
 designed only for the developed world type of developers?
 
@@ -173,28 +174,24 @@ things in the developer hands, or can we let website administrators handle
 some of these? Fortunately, for top-level dropdown menu and footers we already
 have nice solutions provided by products from RedTurtles.
 
-So, yes, let's see if we can reuse the Volto blocks as an engine for "layout
+But let's see if we can reuse the Volto blocks as an engine for "layout
 things".
--->
-
-<!---In my work I tend to deal with websites that value the quality of the
-information over presentation. They're the types of websites that Google uses
-to give you a direct answer to your question. They usually work on mobile
-screens just fine, yet over 90% of visits come from the desktop.
 -->
 
 ## Let's rewind
 
-* Volto has no portlets-like things
-* Some Volto sites need portlets-like things
+* Volto has no site-wide layout customization
+* Some Volto sites need site-wide content things
 * Volto embraces newbies & frontend developers
 
 <!--
 
 -[tibi:next]
-The portlets themselves are a great concept.
+* Volto has no site-wide layout customization
 
 -[tibi:next]
+* Some Volto sites need site-wide content things
+
 Not every project needs them, but
 it's good to have them in the "arsenal".
 
@@ -205,7 +202,7 @@ projects. With Volto it is actually possible for someone with almost 0 Plone
 "backend" knowledge to create and develop a real project.
 -->
 
-## How can we improve portlets?
+## Volto's slots proposition
 
 * Simplify configuration.
 * Volto blocks are very expressive. We can fill the gaps
@@ -216,15 +213,25 @@ projects. With Volto it is actually possible for someone with almost 0 Plone
   - reorder parent with local blocks
 
 <!--
-What can we do to improve the portlet story? These are the propositions of the
-slots:
+What can we do to improve the portlet story? These are the improvements that we
+can make with the slots:
+
+-[tibi:next]
 
 - Simplify configuration of slots. That's just 2 lines of JSON configuration in
   Volto
-- reuse the existing Volto blocks as portlets
+
+-[tibi:next]
+
+- reuse the existing Volto blocks in slots
 - Cover missing gaps with new dedicated Volto blocks, such as navigation
+
+-[tibi:next]
+
 - Allow selectively managing slots as content, editable with the `Modify
   portal content` permission.
+
+-[tibi:next]
 - Having Volto and React power, it's easier to create UI that expresses more
   complex scenarios:
     - atomic blocking of inherited blocks, instead of all or nothing
@@ -237,7 +244,7 @@ slots:
 - Sidebars: listings, info boxes, navigation, etc
 - section headers, content
 - site chrome: fat menus, footers
-- as a generic TTW registry of all things
+- as a generic, context dependent, TTW registry of all things
 
 <!--
 What can we do with them?
@@ -255,9 +262,9 @@ What can we do with them?
 
 ## Current status
 
-- plone.restapi PR, > 100 commits
-- Volto PR, > 260 commits
-- Overall, basic functionality around 60-70% ready
+- plone.restapi PR, > 100 commits ahead master
+- Volto PR, > 260 commits ahead master
+- Overall, `basic` functionality around 60-70% ready
 
 ## Already in use live!
 
@@ -269,7 +276,7 @@ https://demo-freshwater.eea.europa.eu/europe-freshwater/water-framework-directiv
 
 ## Live demo
 
-Warning! None of this is final UI/UX. Consider it pre-alpha.
+Warning! None of this is final UI/UX or functionality.
+Consider it pre-alpha.
 
-## The Quanta Toolbar
-
+## Thank you!
