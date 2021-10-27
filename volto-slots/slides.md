@@ -1,10 +1,65 @@
+---
+class:
+  - invert
+headingDivider: 2
+theme: gaia
+style: |
+---
+<style>
+  .hljs-name {
+    color: #7ee787 !important;
+  }
+
+  .hljs-tag {
+    color: #79c0ff !important;
+  }
+
+  h2 {
+    font-family: serif;
+  }
+  section.leftbg h2 {
+    text-align: left !important;
+  }
+
+  .leftbg h2 {
+  }
+
+  section {
+    font-size: 1.6rem;
+  }
+  section.invert {
+    --color-background: #175E58!important;
+    padding: 2em 3em !important;
+  }
+
+  section code {
+    color: #c9d1d9 !important;
+    background: #161b22 !important;
+  }
+  img {
+    max-height: 80vh;
+    max-width: 100%;
+    text-align: center;
+  }
+  a { color: white }
+</style>
+<!-- _class: lead invert
+
+backgroundImage: linear-gradient(to bottom, #175E58, #29A399)
+-->
 # Volto Slots
 
-##  Problem: Volto has no viewlet-equivalent
+## Volto has no viewlet-equivalent
 
-Solution:
+![bg brightness:0.6](https://images.unsplash.com/photo-1611329857570-f02f340e7378?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80)
 
-```
+<!-- _class: lead invert -->
+
+<!-- Problem -->
+
+## Solution
+
+```jsx
 import { ContextNavigation } from '@plone/volto/components';
 
 config.slots.asideRightSlot: {
@@ -17,41 +72,133 @@ config.slots.asideRightSlot: {
    }
 ```
 
-## Problem: Volto has no portlets
+## Volto has no portlets
 
-Solution:
+![bg brightness:0.6](https://images.unsplash.com/photo-1611329857570-f02f340e7378?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80)
 
-```
+<!-- Problem -->
+<!-- _class: lead invert -->
+
+## Not really...
+
+If you want them bad enough, you can have them
+
+##
+
+#### Portlets in plone.restapi
+
+plone/plone.restapi#portlets_pr_clean
+
+#### Portlets published in Volto
+
+eea/volto-addons-forest/../Portlets
+
+![bg right:50% 90%](./statics/volto-addons-portlets.png)
+
+## Volto's slot-based solution
+
+```jsx
 config.slots.asideRightSlot: {
     title: 'Right column',
     manage: true,
     items: []
   }}
 ```
+<!--
+Notice the "manage:true"
+-->
 
-## Idea: reuse Volto blocks as portlets
+## Idea: let's reuse Volto blocks for layout
+
+<!-- _class: lead invert -->
 
 <!--
-Reuse the Volto blocks as an engine for "layout things".
+Now, I'm not gonna defend one website design over another. As much as I like to
+get myself involved in everything, I have to admit I'm not a designer. I'm
+actually a backend developer who invaded the frontend domain.
+
+Back in 2003-2004 when I've started working with Zope and Plone, I was working
+with my wife for an NGO and in those days, Plone was almost the final face of
+our websites. You could just take default Plone, tweak the styling, add a logo,
+add a few specific portlets, like newsletter signup, news, whatever and call it
+a day.
+
+And that Plone use case I think should still be supported by the future Plone.
+Small websites, large intranet, Plone was able to shape itself into any of
+that. We make our money today from consultancy with Plone, but I wish that we
+don't forget those that we don't see, the ones that are not strong developers
+and just treat Plone and hopefully Plone 6 with Volto, as the final product.
+
+Side note, after all these years of watching the Plone community, I'm still
+amazed when I see new people coming to the Plone community forum. Is there
+still interest in small instalations of Plone, or did we become something where
+you need to dump at least 100k just to get the basics running?
+
+I hope with Erico's recent work and Volto's seamless mode we might get to
+a place where we can look at Volto and have it be almost be a final product.
+There is certainly a sweet spot between Gutenberg's full page layout
+customizability and Plone's strong classic CMS roots, somewhere where Volto can
+be positioned. And I'm extremely grateful to all the guys at Kitconcept and
+those that worked on Volto so far, for placing UX and user friendliness as
+a top priority. It is a continuation of Alex Limi's work and it's staying true
+to the core Plone traits and values.
+
+-->
+
+## Idea: let's reuse Volto blocks for layout
+
+<!-- _class: lead invert -->
+
+<!--
+Thinking back to Nicola's Sustainable Web presentation, you know, we've used
+the same office computers for many years, but when we started to work with
+Volto we've had to upgrade all computers, just to keep with up webpack bundling
+speeds. Yes, we are the developed world, but are we building a product that is
+designed only for the developed world type of developers?
+
+Now, I like to think that there's a place for more control over the site
+layout in Volto. I've seen already many times the lifecycle of many website:
+they get created, a ton of effort and money is spent at their creation, then
+they're abandoned into the hands of content creators and website managers. If
+we don't provide tools for these people to have at least a bit of chance of
+pushing a website forward, on their own, we're basically delivering stillborns:
+websites already dead by the time they're launched.
+
+And portlets are not even a presentational thing, they're "inheritable bits of
+content or miniapps". The portlet term, at its roots, was a way of running
+separate apps, inside the same engine, right? I see Volto blocks as
+a derivative of that idea. And we all have these on all of our websites, from
+top level menus, footers, message boxes, etc. Do we want to always push these
+things in the developer hands, or can we let website administrators handle
+some of these? Fortunately, for top-level dropdown menu and footers we already
+have nice solutions provided by products from RedTurtles.
+
+So, yes, let's see if we can reuse the Volto blocks as an engine for "layout
+things".
+-->
+
+<!---In my work I tend to deal with websites that value the quality of the
+information over presentation. They're the types of websites that Google uses
+to give you a direct answer to your question. They usually work on mobile
+screens just fine, yet over 90% of visits come from the desktop.
 -->
 
 ## Let's rewind
 
-* Volto has no portlets
-* Volto wants portlets
+* Volto has no portlets-like things
+* Some Volto sites need portlets-like things
 * Volto embraces newbies & frontend developers
 
 <!--
-Context:
 
-Volto has no portlets. If you dig hard enough, you'll find a plone.restapi PR
-with portlet serialization and there's even a Volto portlet renderer that I've
-implemented as part of FISE, but the "classic" Plone portlets are not
-officially supported by Volto.
+-[tibi:next]
+The portlets themselves are a great concept.
 
-The portlets themselves are a great concept. Not every project needs them, but
+-[tibi:next]
+Not every project needs them, but
 it's good to have them in the "arsenal".
 
+-[tibi:next]
 With Volto we're trying to empower the frontend developers, so people with no
 knowledge of Plone can make a significant contributions to Plone
 projects. With Volto it is actually possible for someone with almost 0 Plone
@@ -66,7 +213,7 @@ projects. With Volto it is actually possible for someone with almost 0 Plone
 * UI power = more capabilities:
   - atomic blocking of parent blocks
   - override parent blocks
-  - remix parent with local blocks
+  - reorder parent with local blocks
 
 <!--
 What can we do to improve the portlet story? These are the propositions of the
@@ -90,7 +237,7 @@ slots:
 - Sidebars: listings, info boxes, navigation, etc
 - section headers, content
 - site chrome: fat menus, footers
-- as a generic registry?
+- as a generic TTW registry of all things
 
 <!--
 What can we do with them?
@@ -99,21 +246,30 @@ What can we do with them?
 - "fat menus".
 - section headers, content
 - footers
-- etc
 - Wild scenarios, such as using the slots endpoint as a registry for site-wide
-  configuration. A "TTW block designer" could use the slots to store its
+  configuration. A "TTW block designer" could use the slots as a storage for
   presets.
 -->
+
+![bg right:50%](https://images.unsplash.com/photo-1513002749550-c59d786b8e6c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=774&q=80)
 
 ## Current status
 
 - plone.restapi PR, > 100 commits
-  - basic functionality around 80% ready
 - Volto PR, > 260 commits
-  - basic functionality around 80% ready
+- Overall, basic functionality around 60-70% ready
 
-## Already used live!
+## Already in use live!
+
+![bg right:70% 89%](./statics/wise-freshwater.png)
+
+<!--
+https://demo-freshwater.eea.europa.eu/europe-freshwater/water-framework-directive/surface-water-ecological-status-pressures
+-->
 
 ## Live demo
 
+Warning! None of this is final UI/UX. Consider it pre-alpha.
+
 ## The Quanta Toolbar
+
