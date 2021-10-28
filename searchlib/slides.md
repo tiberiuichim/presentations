@@ -51,7 +51,7 @@ backgroundImage: linear-gradient(to bottom, #00888A, #086ca3)
 
 # EEA Searchlib
 
-### Volto-integrated advanced search library
+### Volto-integrated advanced search services
 
 ## Developers
 
@@ -285,11 +285,24 @@ We plan on adding more services. If we have time, I can demonstrate some of the
 things that it can do right now.
 -->
 
-## NLP Server Configuration
+## NLP-Server Configuration
 
 .yml based pipeline configuration
 
 ![bg right:60% 90%](./statics/search-pipeline.png)
+
+## NLP-Server Capabilities
+
+- Elasticsearch proxy
+- ES search results reranking
+- Question and Answering
+- Query classification
+- Summarization
+- Similarity
+- Question extraction
+- Named Entity Recognition extraction
+- Zero-shot classifier
+- Text embedding
 
 ## QA process
 
@@ -312,6 +325,9 @@ Reader model, which extracts and ranks the answers from the candidates.
 - Already in use as non-NLP integrated app
 - Volto integration exists
 - Future: UI improvements, more NLP
+
+<!-- talk about challenges: pnpm monorepo, managing dependencies, overlap of
+dependencies with Volto builtins -->
 
 ![bg right:30% 60%](./statics/volto-searchlib.png)
 
