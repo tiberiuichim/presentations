@@ -52,7 +52,6 @@ backgroundImage: linear-gradient(to bottom, #00888A, #086ca3)
 # EEA Searchlib
 
 ### Volto-integrated advanced search library
-### all open source
 
 ## Developers
 
@@ -311,6 +310,10 @@ Reader model, which extracts and ranks the answers from the candidates.
 
 - Launch due in March 2023
 - Already in use as non-NLP integrated app
+- Volto integration exists
+- Future: UI improvements, more NLP
+
+![bg right:30% 60%](./statics/volto-searchlib.png)
 
 <!--
     QUESTIONS = [
