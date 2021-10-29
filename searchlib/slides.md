@@ -109,7 +109,8 @@ The global search solves a unique problem, though, which is that of indexing
 and cataloguing many EEA websites. We index the websites using a ping process
 (initiated by the site) and the information will be gathered from the source
 website in RDF format and stored in a Virtuoso database, for which we have
-a SPARQL endpoint. From that sparql endpoint
+a SPARQL endpoint. From that sparql endpoint we download the data and index it
+in ES
 
 Hard to further develop, basically a one man show (Zoltan).
 -->
@@ -145,25 +146,38 @@ ES that runs as volto block.
 
 So this is the first search engine I built with Volto and React. Fortunately I was
 able to use a React library, Searchkit v2, which made things really easy
+
+Note, there is another volto-searchkit addon, made by Katja, based on
+a different library.
+
+One central idea when dealing with volto-powered search engine integrations, we
+always use Volto's Express search engine to run a proxy to the ElasticSearch.
+This makes Volto's http server somewhat similar the wsgi standard, where you
+can combine multiple applications in the same http server. It's a nice system.
+We lack the long-term experience of working with Express, but we get things
+done.
 -->
 
 ## One search appliance to rule them all
 
 <!-- _class: lead invert -->
 
-##
-
-![bg 50%](./statics/searchlib-globalsearch.png)
-
 <!--
 So now we arrive at the subject of this presentation.
-
-Searchlib is the internal name, but it represents a bunch of various packages.
 
 The idea is to create a library, on top of React, that can be used to build
 Elasticsearch-powered search engines, with a dash of semantic search and NLP
 thrown on top.
+-->
 
+## EEA Searchlib
+
+![bg right:50% 90%](./statics/searchlib-globalsearch.png)
+
+<!--
+Searchlib is the internal name, but it represents a bunch of various packages,
+services and workflows and the aim is to provide a fully modernized search
+service that can replace the existing Global Search
 -->
 
 ## Modern UI initiative
@@ -285,12 +299,6 @@ We plan on adding more services. If we have time, I can demonstrate some of the
 things that it can do right now.
 -->
 
-## NLP-Server Configuration
-
-.yml based pipeline configuration
-
-![bg right:60% 90%](./statics/search-pipeline.png)
-
 ## NLP-Server Capabilities
 
 - Elasticsearch proxy
@@ -298,11 +306,30 @@ things that it can do right now.
 - Question and Answering
 - Query classification
 - Summarization
-- Similarity
-- Question extraction
+- Text Similarity
+- Question generation
 - Named Entity Recognition extraction
 - Zero-shot classifier
 - Text embedding
+
+<!--
+- Elasticsearch proxy
+- ES search results reranking
+- Question and Answering
+- Query classification
+- Summarization
+- Text Similarity
+- Question generation
+- Named Entity Recognition extraction
+- Zero-shot classifier
+- Text embedding
+-->
+
+## NLP-Server Configuration
+
+.yml based pipeline configuration
+
+![bg right:60% 90%](./statics/search-pipeline.png)
 
 ## QA process
 
@@ -312,7 +339,13 @@ things that it can do right now.
 
 ![bg right:60% 90%](./statics/dense-passage.png)
 
-<!-- Because on the fly tokenization and vectorization is rather expensive, the
+<!--
+The QA pipeline is probably the most important for us right now. It's based on
+Deepset Haystack models, which provides specialized models for QA. Those models
+are trained with a special framework called dual-head encoder, which is
+a recent technique that appeared in the last year.
+
+Because on the fly tokenization and vectorization is rather expensive, the
 usual process is to retrieve the "best candidates" using either a dense
 retriever (a vector capable database, such as Weaviate or Faiss) or sparse
 (simple Elasticsearch BM25 ranking), then these candidates are passed to the
@@ -321,8 +354,10 @@ Reader model, which extracts and ranks the answers from the candidates.
 
 ## Current status
 
-- Launch due in March 2023
+- Work started in April-May 2021
+- Launch due next year
 - Already in use as non-NLP integrated app
+- Also used for non-EEA projects (CodeSyntax)
 - Volto integration exists
 - Future: UI improvements, more NLP
 
