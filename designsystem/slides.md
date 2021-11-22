@@ -46,7 +46,7 @@ style: |
 
 <!-- _class: lead invert
 
-backgroundImage: linear-gradient(to bottom, #00888A, #086ca3)
+backgroundImage: linear-gradient(to bottom, #00228A, #086ca3)
 -->
 
 <!--
@@ -106,26 +106,34 @@ we want to deliver the specification for them.
 
 # EEA Design System
 
-# EEA CMS
 <!-- _class: lead invert -->
 
+# EEA CMS
+
 - We use Plone 6 CMS
-- Open source
+- Everything is open source
 - React frontend (Volto)
 
 # The websites
 
-- EEA IMSv4 https://www.eea.europa.eu/ims
-- FISE https://forest.eea.europa.eu/
-- BISE http://biodiversity.europa.eu/
-- WISE-Freshwater https://water.europa.eu/freshwater
-- Climate-Energy https://climate-energy.eea.europa.eu/
-- Industrial Emissions https://industry.eea.europa.eu/
+- EEA IMSv4
+  https://www.eea.europa.eu/ims
+- FISE
+  https://forest.eea.europa.eu/
+- BISE
+  http://biodiversity.europa.eu/
+- WISE-Freshwater
+  https://water.europa.eu/freshwater
+- Climate-Energy
+  https://climate-energy.eea.europa.eu/
+- Industrial Emissions
+  https://industry.eea.europa.eu/
+- more to come
 
-# The editing process
+# EEA editing process
 
 - WYSIWYG editing
-- Pages are composite pages, text intermixed with blocks
+- Pages are composite pages, text intermixed with special blocks
 - System similar to Wordpress Gutenberg
 
 # Volto theming system
@@ -137,15 +145,7 @@ we want to deliver the specification for them.
 
 # The future EEA Design System
 
-- Awesome Design Systems https://github.com/alexpate/awesome-design-systems
-- Europa Component Library https://github.com/ec-europa/europa-component-library
-- It should include:
-  - Look and feel: mockups, implementation
-  - Components: mockups, implementation
-
-# Requirements
-
-Creation and maintenance of a design system:
+**Creation and maintenance of a design system:**
 
 - Branding, high level specification
 - Complete design system as a static website
@@ -154,14 +154,85 @@ Creation and maintenance of a design system:
 - Design Kits
 - Github repos
 
-# Branding
+See:
 
-- Creation of a high-level branding concept and design principles for the EEA
-  and its family of websites, taking into consideration pre-existing work (EEA
-  logo, corporate color palette) (see annex 10), design of EEA printed
-  products), current web design elements.
+- Europa Component Library https://ec.europa.eu/component-library/ec/
+https://github.com/ec-europa/europa-component-library
+- Awesome Design Systems https://github.com/alexpate/awesome-design-systems
 
-# Design system as static website
+# Deliveries
+
+- Requirement 1 — **Creation of a high-level branding** (1 Jan)
+- Requirement 2 — **Core Semantic UI theme** (End-Jan 22)
+- Requirement 3 — **All design elements** (End-Feb 22)
+
+## Requirement 1 - High level branding
+
+Creation of a high-level branding concept and design principles for the EEA and
+its family of websites, taking into consideration pre-existing work (EEA logo,
+corporate color palette) (see annex 10), design of EEA printed products),
+current web design elements.
+
+Core template (site header, page header, footer) e.g.,
+https://ec.europa.eu/component-library/ec/core-template/
+
+##
+
+This would also include
+
+- Colors
+- Typography
+- Main grid
+
+Not in scope in this package:
+
+- branding of printed material, e.g. reports, posters.
+
+## Applied branding
+
+Specific example of branding applied to an **EEA standard webpage** (e.g.
+article/briefing):
+
+- Layout example of a webpage with applied template, in 3 main layouts:
+  - Mobile (vertical)
+  - Tablet/mobile-landscape (landscape)
+  - Desktop
+
+## Mobile first
+
+Design proposals should start with the smallest resolution and viewport in mind
+(mobile-first), and progressively create layouts for the next resolution and so
+on (progressive enhancements).
+
+**Mobile**: Provide a design for mobile displays with size 360×640 (this will help
+us create a fluid design from 360×640 through 414×896)
+
+**Tablet**: Provide a design for tablet displays by giving a design with size
+768×1024 (this will help us create a fluid design from 601×962 through
+1280×800)
+
+**Desktop**: Provide a design for desktop displays by giving a design with size
+1366×768 (this will help us create a fluid design from 1024×768 through
+1920×1080)
+
+## Delivery of requirement 1
+
+**Expected delivery to EEA web team: 1 Jan 2022**
+
+Deliver approved Figma (or similar) layouts
+
+
+<!--
+
+On 1 Jan, web team should receive header, page header, footer
+
+-->
+
+## Requirement 2 — Core Semantic-UI theme (End-Jan 22)
+
+Branding applied to Semantic UI core elements - https://react.semantic-ui.com/
+
+## Design system as static website
 
 - Based on these new branding and design principles, implementation of
   a complete online design system. The design system is to be published as
@@ -170,36 +241,41 @@ Creation and maintenance of a design system:
   design. Its content is expected to be similar to
   https://ec.europa.eu/component-library/ec/ with EEA specific needs.
 
-# Semantic-UI Theme and React components
+## Semantic-UI Theme and React components
 
 - The design system will be based on specific Semantic UI React-components
   (https://react.semantic-ui.com/elements/header/), that will need to be styled
   according to the EEA design systems and then re-used by designers and web
   developers working in other projects/contracts at EEA.
 
-# Iconography as SVG
+## Accessibility
+
+- Highly accesible implementation of components is expected. See WCAG 2.0
+(A/AA/AAA) accessibility standards and requirements
+
+## Iconography as SVG
 
 - Iconography for the new design system, in vector format as SVG icons library.
 
-# Downloadable design kits
+## Downloadable design kits
 
 - The design system should not only address the needs of web developers but
   also address the needs of designers by including downloadable “Design Kits”
   in Adobe Illustrator, see examples on some existing design systems for
   example “Aurora Design System”.
 
-# Github repos
+## Github repos
 
 - All the source code and design system deliverables will be managed in
   specific repos in EEA GitHub (https://github.com/eea) and design system
   website hosted at EEA.
 
-# Maintainance, further development of the design system
+## Maintainance, further development of the design system
 
 - Maintain and develop further the design system
 - Integrate with other systems (EEA Semantic Search)
 
-# Resource people
+## Resource people
 
 - David Ichim, main EEA website frontend developer
   - EEA website expert
