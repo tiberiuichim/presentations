@@ -171,7 +171,7 @@ Example of [complex page](https://www.eea.europa.eu/publications/europes-changin
 - Similar effort to Europa Component Library
 https://ec.europa.eu/component-library/ec/
 https://github.com/ec-europa/europa-component-library
-- EEA Design System Repo:
+- EEA Design System repo:
   https://github.com/eea/volto-eea-design-system
 
 <!--
@@ -546,9 +546,9 @@ Schedule follow-up meetings.
 
 We want to have a demo website with the design system in place.
 
-- demo-www.eea.europa.eu
-- design.eea.europa - static website design system
-- design-storybook.eea.europa.eu
+- demo-www.eea.europa.eu - live website with EEA Design System CSS in use
+- design.eea.europa.eu - static website design system
+- design-storybook.eea.europa.eu - Storybook stories, linked from the design system
 
 ## Working teams
 
