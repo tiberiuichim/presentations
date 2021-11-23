@@ -46,7 +46,7 @@ style: |
 
 <!-- _class: lead invert
 
-backgroundImage: linear-gradient(to bottom, #00228A, #086ca3)
+backgroundImage: linear-gradient(to bottom, #00228A, #2e5747)
 -->
 
 <!--
@@ -136,6 +136,9 @@ we want to deliver the specification for them.
 - Pages are composite pages, text intermixed with special blocks
 - System similar to Wordpress Gutenberg
 
+Example of [complex page](https://www.eea.europa.eu/publications/europes-changing-climate-hazards-1/climate-hazards-indices): see EEA Briefings
+
+
 # Volto theming system
 
 - SemanticUI CSS framework
@@ -143,7 +146,7 @@ we want to deliver the specification for them.
 - custom EEA addons
 - Each website has its own Volto theme. We want to change that
 
-# The future EEA Design System
+# The EEA Design System
 
 **Creation and maintenance of a design system:**
 
@@ -158,23 +161,38 @@ See:
 
 - Europa Component Library https://ec.europa.eu/component-library/ec/
 https://github.com/ec-europa/europa-component-library
+- EEA Design System Repo:
+  https://github.com/eea/volto-eea-design-system
+
+<!--
 - Awesome Design Systems https://github.com/alexpate/awesome-design-systems
+-->
 
 # Deliveries
 
 - Requirement 1 — **Creation of a high-level branding** (1 Jan)
 - Requirement 2 — **Core Semantic UI theme** (End-Jan 22)
 - Requirement 3 — **All design elements** (End-Feb 22)
+- Requirement 4 — **New website Sitemap** (End-feb 22)
+- Requirement 5 — **New Homepage** (End-May 22)
+- Requirement 6 — **Detailed layout for each of the main sections** (top navigation) (End-May)
+- Requirement 7 — **On-demand support** to apply design system to specific web
+  applications - continuous activity until launch date March 23
 
-## Requirement 1 - High level branding
+
+# Requirement 1 - High level branding
+
+**Delivery by 1 Jan 2022**
+
+- High level branding
+- Design principles
+- Applied branding to standard template
+- Figma layouts
 
 Creation of a high-level branding concept and design principles for the EEA and
 its family of websites, taking into consideration pre-existing work (EEA logo,
-corporate color palette) (see annex 10), design of EEA printed products),
+corporate color palette) (see annex 10), design of EEA printed products,
 current web design elements.
-
-Core template (site header, page header, footer) e.g.,
-https://ec.europa.eu/component-library/ec/core-template/
 
 ##
 
@@ -184,9 +202,12 @@ This would also include
 - Typography
 - Main grid
 
-Not in scope in this package:
+Not in scope in this delivery:
 
 - branding of printed material, e.g. reports, posters.
+
+Core template (site header, page header, page footer, site footer) e.g.,
+https://ec.europa.eu/component-library/ec/core-template/
 
 ## Applied branding
 
@@ -228,18 +249,71 @@ On 1 Jan, web team should receive header, page header, footer
 
 -->
 
-## Requirement 2 — Core Semantic-UI theme (End-Jan 22)
+# Requirement 2 — Core Semantic-UI theme
+**Delivery by end-Jan 22**
 
+- Design system static website
+- Semantic-UI theme and themed components
+
+<!--
 Branding applied to Semantic UI core elements - https://react.semantic-ui.com/
+-->
 
 ## Design system as static website
 
-- Based on these new branding and design principles, implementation of
+- Use Docusaurus and Storybook
+- Deploy on https://design.eea.europa.eu and
+  https://design-storybook.eea.europa.eu
+- Content similar to Europa Component Library (ECL)
+- Include Semantic-UI-React themed components
+
+<!--
+Based on these new branding and design principles, implementation of
   a complete online design system. The design system is to be published as
   a website under the EEA domain, e.g., https://design.eea.europa.eu (using
   Docusaurus and Storybook) documenting and showcasing all elements of the new
   design. Its content is expected to be similar to
   https://ec.europa.eu/component-library/ec/ with EEA specific needs.
+  -->
+
+## Content of design system website
+
+Including, but not limited to:
+
+- **Core branding**: colors, typography, spacing, general page structure (alignment, high-level page structure)
+- **Core Semantic-UI React components**
+- **Low-level EEA components** for EEA websites
+
+<!-- these are the elements that we'll watch out for (coming in the next
+slides) -->
+
+## Core Semantic-UI React components
+
+Button Container Grid Card Item Segment Statistic Form Input Table Message
+Header Image Label Dropdown Menu List Accordion Popup Progress Checkbox Confirm
+Modal Breadcrumb Tab Radio Pagination Comment, etc
+
+## Low-level components for EEA websites
+
+Table of Contents
+Blockquotes
+Pullquotes
+Timeline
+Page
+Banner
+Featured Item
+Inpage navigation
+Grids, etc
+
+## Grid layout
+
+HTML/CSS/JS with grid layout for a Standard page/Article/News/Briefing
+
+Grid for main site template.
+
+"Content grid" for the article page.
+
+https://ec.europa.eu/component-library/ec/standardised-template/
 
 ## Semantic-UI Theme and React components
 
@@ -247,6 +321,8 @@ Branding applied to Semantic UI core elements - https://react.semantic-ui.com/
   (https://react.semantic-ui.com/elements/header/), that will need to be styled
   according to the EEA design systems and then re-used by designers and web
   developers working in other projects/contracts at EEA.
+
+# Guiding principles
 
 ## Accessibility
 
@@ -257,12 +333,8 @@ Branding applied to Semantic UI core elements - https://react.semantic-ui.com/
 
 - Iconography for the new design system, in vector format as SVG icons library.
 
-## Downloadable design kits
-
-- The design system should not only address the needs of web developers but
-  also address the needs of designers by including downloadable “Design Kits”
-  in Adobe Illustrator, see examples on some existing design systems for
-  example “Aurora Design System”.
+We're using FontAwesome-derived icons. New icons should be delivered as SVG
+icons.
 
 ## Github repos
 
@@ -270,16 +342,64 @@ Branding applied to Semantic UI core elements - https://react.semantic-ui.com/
   specific repos in EEA GitHub (https://github.com/eea) and design system
   website hosted at EEA.
 
+  EEA Semantic-UI Theme:
+  https://github.com/eea/volto-eea-design-system
+
+  This repo should also host the Docusaurus, Storybook, Figma and designer kits
+  implementations.
+
+# Development workflow
+
+Use Gitflow-based development workflow. Master branch is protected, separate
+PRs for features/bugfixes to the develop branch. Releases are produced by
+merging develop to master.
+
+Use semantic-versioned Github releases. Ex:
+https://github.com/ec-europa/europa-component-library/releases
+
+# Software quality
+
+Webscore - https://webscore.eea.europa.eu
+
+# Requirement 7 — On-demand support
+
+On-demand support to apply design system to specific web applications
+- continuous activity until launch date March 23
+
+At least one front-end developer and at least one UX designer available on
+a daily basis for supporting the Web Development Team (DIS1) on implementation
+of design.
+
+- UX and design support for the new EEA website
+- UX and design support for the new EEA search
+- UX and design support for the new Data hub
+
 ## Maintainance, further development of the design system
 
 - Maintain and develop further the design system
 - Integrate with other systems (EEA Semantic Search)
 
+## Follow-up meetings
+
+Schedule follow-up meetings.
+
+## Demo site
+
+We want to have a demo website with the design system in place.
+
+- demo-www.eea.europa.eu
+- design.eea.europa - static website design system
+- design-storybook.eea.europa.eu
+
 ## Resource people
 
 - David Ichim, main EEA website frontend developer
-  - EEA website expert
+  - EEA frontend expert
 - Tiberiu Ichim, lead developer for thematic websites
   - Volto systems expert
 - Backup: Alin Voinea, lead developer EEA website
-  - Development process expert
+  - DevOps, Development process expert
+
+Contact on EEA Riot, "EEA Design System" room.
+
+Who is ITML contact point?
