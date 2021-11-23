@@ -174,6 +174,9 @@ https://github.com/ec-europa/europa-component-library
 - Requirement 2 — **Core Semantic UI theme** (End-Jan 22)
 - Requirement 3 — **All design elements** (End-Feb 22)
 - Requirement 4 — **New website Sitemap** (End-feb 22)
+
+Second contract
+
 - Requirement 5 — **New Homepage** (End-May 22)
 - Requirement 6 — **Detailed layout for each of the main sections** (top navigation) (End-May)
 - Requirement 7 — **On-demand support** to apply design system to specific web
@@ -348,7 +351,7 @@ icons.
   This repo should also host the Docusaurus, Storybook, Figma and designer kits
   implementations.
 
-# Development workflow
+## Development workflow
 
 Use Gitflow-based development workflow. Master branch is protected, separate
 PRs for features/bugfixes to the develop branch. Releases are produced by
@@ -357,9 +360,55 @@ merging develop to master.
 Use semantic-versioned Github releases. Ex:
 https://github.com/ec-europa/europa-component-library/releases
 
-# Software quality
+## Software quality
 
 Webscore - https://webscore.eea.europa.eu
+
+# Requirement 3 — all design elements
+
+(End-Feb 22)
+
+Content types and variations:
+
+- Standard web page
+- Article/News/Briefing (Web report)
+- Report (with one or more PDFs)
+- Web report
+- Indicator
+- Visualizations:
+  - Map (static/interactive)
+  - Chart (static/interactive)
+  - Dashboard
+  - Infographic
+- FAQs
+
+##
+
+Views:
+
+- Listing of pages
+- Card
+- Form elements
+- Search pages
+
+##
+
+Porting the EEA specific design elements from existing Web design style guide
+to Semantic UI:
+
+- Layout
+- Elements
+- Components
+
+TinyMCE styles
+
+# Requirement 4 — New website Sitemap (End-feb 22)
+
+The information architecture.
+
+At least 3 levels of depth of the new website sitemap (including datahub and
+linkages to the other EEA websites). Description of each of the sections and
+pages of the new sitemap.
 
 # Requirement 7 — On-demand support
 
