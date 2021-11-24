@@ -217,12 +217,16 @@ Based on **"Web UX requirements and timeline"** document
 
 # Requirement 1 - High level branding
 
+**Delivery by 15 Dec 2021**
+
+- 3 different mockups of branding to (COM) EEA UX Team
+
 **Delivery by 1 Jan 2022**
 
 - High level branding
 - Design principles
 - Applied branding to standard template
-- Approved Figma (or similar) layouts
+- **Approved** Figma (or similar) layouts
 
 Creation of a high-level branding concept and design principles for the EEA and
 its family of websites, taking into consideration pre-existing work (EEA logo,
