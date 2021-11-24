@@ -146,6 +146,10 @@ we want to deliver the specification for them.
 
 and more to come
 
+##
+
+![bg 95%](./statics/EEA-new-design-sites.png)
+
 # EEA editing process
 
 - WYSIWYG editing
@@ -162,7 +166,7 @@ Example of [complex page](https://www.eea.europa.eu/publications/europes-changin
 - Custom EEA addons
 - Each EEA website has its own 'from scratch' Volto theme
 
-### We want a common base theme.
+### We want a common base theme. "EEA Design Theme"
 
 # The EEA Design System
 
