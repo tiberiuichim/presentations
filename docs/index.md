@@ -143,12 +143,16 @@ we want to deliver the specification for them.
   industry.eea.europa.eu
 - Land Copernicus
   clmsdemo.devel6cph.eea.europa.eu
+- EEA Search (new, one page data catalogue)
+  search.ai-lab-aws.eea.europa.eu
+- Datahub (new)
+  data.eea.europa.eu ?
 
 and more to come
 
-##
+## EEA applied Design System overview
 
-![bg 95%](./statics/EEA-new-design-sites.png)
+![bg 75%](./statics/EEA-new-design-sites.png)
 
 # EEA editing process
 
@@ -189,6 +193,10 @@ See:
 
 - Awesome Design Systems https://github.com/alexpate/awesome-design-systems
 -->
+
+## Involved teams and overall workflow
+
+![bg 85%](./statics/EEA-design-workflow.png)
 
 # Deliveries
 
