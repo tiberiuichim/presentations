@@ -244,6 +244,8 @@ article/briefing):
   - Tablet/mobile-landscape (landscape)
   - Desktop
 
+(This does not include the 3 mockups that are to be delivered to COM by 15
+December)
 ##
 
 **Mobile first**
@@ -464,9 +466,10 @@ to Semantic UI:
 - Old TinyMCE styles
 -->
 
-## Delivery
-HTML markup expressed as React components, CSS stylesheet library integrated
-with Semantic-UI. Should include variations for responsive design.
+## Deliverables
+
+HTML markup expressed as **React components** library, CSS stylesheet library
+integrated with Semantic-UI. Should include variations for responsive design.
 
 # Requirement 4 — New website Sitemap
 
@@ -532,6 +535,14 @@ of design.
 
 - Maintain and develop further the design system
 - Integrate with other systems (EEA Semantic Search)
+
+# More to come
+
+- Datahub frontpage design delivery
+- EEA design system applied to Plotly charts. The UX contractor would need to
+also provide examples and themes for the Plotly charts, that we can integrate
+in the Plone components.
+
 
 ## Follow-up meetings
 
