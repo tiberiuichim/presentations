@@ -585,6 +585,7 @@ We want to have a demo website with the design system in place.
   - frontend
   - devops
 - ITML design + UX + frontend
+- UX research testing team
 
 ## Resource people
 
