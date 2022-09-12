@@ -42,370 +42,545 @@ style: |
       text-align: center;
     }
     a { color: white }
+    section.columns ul {
+        display: grid;
+         grid-template-columns: 1fr 1fr 1fr;
+    }
+    section.twocolumns ul {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    section.twocolumns li {
+      padding-bottom: 0.5em;
+    }
   </style>
 
 <!-- _class: lead invert
 
-backgroundImage: linear-gradient(to bottom, #00888A, #086ca3)
+backgroundImage: linear-gradient(to bottom, #00228A, #2e5747)
 -->
-
-# EEA Searchlib
-
-### Volto-integrated advanced search services
-
-## Developers
-
-- Tiberiu Ichim
-- Zoltan Szabo
-- Ghita Bizau
-
-
-## History
-
-<!--
-When it come to an organisation such as EEA, with a lot of specialized content,
-having a good search integration becomes a high priority. So we have seen
-development, over the years, of several search products, and many of them are
-still in use.
--->
-
-## eea.facetednavigation
-
-- Runs on Plone
-- Backend: ZCatalog
-
-![bg right:59% 96%](./statics/eea-faceted-navigation.png)
-
-<!--
-It is a complex and somewhat complete search solution for Plone websites.
-
-Advantages: somewhat easy to setup
-Disadvantages: limited fulltext search capabilities, uses Zope catalog, you can
-only search Plone content
--->
-
-## eea.searchserver.js
-
-![bg right:60% 96%](./statics/global-search.png)
-
-- Backend: Elasticsearch
-- JQuery
-
-## EEA Global Search
-
-- indexes many EEA websites
-- source sites initiate ping
-- data is harvested from Plone eea.rdfmarshaller view
-- stored in Virtuoso
-- downloaded with SPARQL
-
-![bg right:30% 100%](./statics/global-search.png)
 
 <!--
 
-Hard to integrate on other systems. But it has been done.
+steps, practical examples
 
-The global search solves a unique problem, though, which is that of indexing
-and cataloguing many EEA websites. We index the websites using a ping process
-(initiated by the site) and the information will be gathered from the source
-website in RDF format and stored in a Virtuoso database, for which we have
-a SPARQL endpoint. From that sparql endpoint we download the data and index it
-in ES
+we want 3 things, like EC design system:
 
-Hard to further develop, basically a one man show (Zoltan).
+- usage
+- showcase
+- storybook
+
+maintain the design system, main components, we import the release
+
+
+sui code, react components, releasable, we can import in our volto theme setup and they must have a Plone
+
+show a presentation of how to get started.
+
+show a workflow diagram on how they should work.
+
+components library exist, we don't have the design system, that's what's inside react.
+
+show them examples, they have to do.
+
+we want to deliver the specification for them.
+
+- how they should develop this,
+- how they should deliver this
+- how they should maintain the library, they have to be maintainers, it's their main delivery, we have to establish a colaboration system for back/forth.
+
+- technical requirements ambition level. Get a feeling from their team.
+
+- what we want from the design system. Show EC example, explain instead of that code we want SemanticUI code, the contents are almost the same.
+
+- We need things releasable, so we want a library with a theme and components. Development workflow with a diagram on how they deliver, how we use them.
+
+- We're gonna have a test site. Practical 'how to deliver, how to develop'. Document how to make the documentation.
+
+- Already schedule some more in-depth meetings for specific things: how to do stuff with Volto.
+
+====] Timeline of meeting, Agenda: [====
+
+- short intro from Antonio + Marie
+    - they need to work with us
+    - expected delivery + deadlines
+- short intro on the projects we do. Show Volto websites
+- theming system in Volto (semanticui, themes, react components)
+- design system details
+- development workflow. Document the documentation.
+- discuss the need for test site
+- schedule new meetings for specific sites
 -->
 
-## eea.searchserver.js
-
-Climate-Adapt
-
-![bg right:60% 96%](./statics/cca-catalogue.png)
-
-## eea.searchserver.js
-
-FISE
-
-![bg right:60% 96%](./statics/fise-catalogue.png)
-
-## volto-searchkit
-
-- ES + Volto
-- github:eea/volto-searchkit
-- github:searchkit/searchkit
-
-![bg right:59% 90%](./statics/bise-catalogue.png)
 
 
-<!--
 
-When I've started to work on BISE and we needed the catalogue, I knew that
-integrating the eea.searchserver.js will be a hard task. And we already had the
-ElasticSearch indexes prepared, which would have probably been incompatible
-with eea.searchserver, so we went the route of implementing an integration with
-ES that runs as volto block.
-
-So this is the first search engine I built with Volto and React. Fortunately I was
-able to use a React library, Searchkit v2, which made things really easy
-
-Note, there is another volto-searchkit addon, made by Katja, based on
-a different library.
-
-One central idea when dealing with volto-powered search engine integrations, we
-always use Volto's Express search engine to run a proxy to the ElasticSearch.
-This makes Volto's http server somewhat similar the wsgi standard, where you
-can combine multiple applications in the same http server. It's a nice system.
-We lack the long-term experience of working with Express, but we get things
-done.
--->
-
-## One search appliance to rule them all
+# EEA Design System
 
 <!-- _class: lead invert -->
 
-<!--
-So now we arrive at the subject of this presentation.
+# EEA CMS
 
-The idea is to create a library, on top of React, that can be used to build
-Elasticsearch-powered search engines, with a dash of semantic search and NLP
-thrown on top.
--->
+- We use Plone 6 CMS
+- Everything is open source
+- React frontend (Volto)
 
-## EEA Searchlib
+## The websites
 
-![bg right:50% 90%](./statics/searchlib-globalsearch.png)
+<!-- _class: twocolumns invert -->
 
-<!--
-Searchlib is the internal name, but it represents a bunch of various packages,
-services and workflows and the aim is to provide a fully modernized search
-service that can replace the existing Global Search
--->
+- EEA IMSv4
+  www.eea.europa.eu/ims
+- FISE
+  forest.eea.europa.eu
+- BISE
+  biodiversity.europa.eu
+- WISE-Freshwater
+  water.europa.eu/freshwater
+- Climate-Energy
+  climate-energy.eea.europa.eu
+- Industrial Emissions
+  industry.eea.europa.eu
+- Land Copernicus
+  clmsdemo.devel6cph.eea.europa.eu
 
-## Modern UI initiative
+and more to come
 
-![bg 50%](./statics/modal-facet.png)
+# EEA editing process
 
-<!--
-One of the main problems with the old search engine was also of UX. This could
-have been potentially solved in the old engine, but being based on JQuery and
-limited to a single guy that really knew what was going on, it was impossible.
-Also, you don't dump money in outdated technology
--->
+- WYSIWYG editing
+- Pages are composite pages, text intermixed with more complex blocks
+- System similar to Wordpress Gutenberg, Google Docs, Medium, Facebook Pages
 
-## Working configurations
-
-- Single Page Application
-- Integrated with Plone4/5
-- Node.js based, Razzle-powered Standalone
-- Volto block
-
-![bg right:50% 90%](./statics/searchlib-architecture.png)
-
-<!--
-In theory we cover almost any configuration, and this is already working
-code, not something that we'd like to do in the future.
-
-For the future we want to provide alternate, minimal views, such as minimal
-listings, featured items, etc.
-
--->
+Example of [complex page](https://www.eea.europa.eu/publications/europes-changing-climate-hazards-1/climate-hazards-indices): see EEA Briefings
 
 
-## Apache Airflow harvester
+# Volto theming system
 
-gh:eea/eea-crawler
+- SemanticUI CSS framework. Based on LESS
+- SemanticUI-React for components
+- Custom EEA addons
+- Each EEA website has its own 'from scratch' Volto theme
 
-![bg right:60% 98%](./statics/all-dags.png)
+### We want a common base theme.
 
-<!--
-We use Apache Airflow as a task runner. We chose Airflow because of wide
-community backing. Now, Airflow is maybe not the best choice for the task we
-had ahead of us, but we managed to achieve all of our goals, which is to have
-a dynamic harvester.
--->
+# The EEA Design System
 
-## Task 1: crawl a Plone website
+**Creation and maintenance of a design system:**
 
-![bg 60%](./statics/airflow-crawl-restapi.png)
-
-<!-- Airflow uses configuration scripts for its workflows, which it calls DAGs
-- directed acyclical graphs. These dags can't be fully dynamic, so we chain
-  dags, we have a task that can be part of a DAG and can trigger another DAG
-  run.
-
--->
-
-## Trigger a DAG
-
-![bg 40%](./statics/trigger-dag.png)
+- Similar effort to Europa Component Library
+https://ec.europa.eu/component-library/ec/
+https://github.com/ec-europa/europa-component-library
+- EEA Design System repo:
+  https://github.com/eea/volto-eea-design-system
 
 <!--
-We can manually trigger a DAG, starting with a JSON configuration parameter,
-but most of them run via Airflow internal cron scheduller.
+- Branding, high level specification
+- Complete design system as a static website
+- Integrate SemanticUI + React
+- Iconography
+- Github repos
+
+See:
+
+- Awesome Design Systems https://github.com/alexpate/awesome-design-systems
 -->
 
-## Dynamic pools
+# Deliveries
 
-![bg 60%](./statics/pools.png)
+- Requirement 1 — **High-level branding** (1 Jan)
+- Requirement 2 — **Core Semantic UI theme and components** (End-Jan 22)
+- Requirement 3 — **All design elements** (End-Feb 22)
+- Requirement 4 — **New website sitemap** (End-feb 22)
+
+Second contract
+
+- Requirement 5 — **New Homepage** (End-May 22)
+- Requirement 6 — **Detailed layout for each of the main sections** (top navigation) (End-May)
+
+**On-demand support** to apply design system to specific web
+  applications - continuous activity until launch date March 23
+
+Based on **"Web UX requirements and timeline"** document
+
+# Requirement 1 - High level branding
+
+**Delivery by 1 Jan 2022**
+
+- High level branding
+- Design principles
+- Applied branding to standard template
+- Approved Figma (or similar) layouts
+
+Creation of a high-level branding concept and design principles for the EEA and
+its family of websites, taking into consideration pre-existing work (EEA logo,
+corporate color palette) (see annex 10), design of EEA printed products,
+current web design elements.
+
+##
+
+This would also include
+
+- Colors
+- Typography
+- Main grid
+
+Not in scope in this delivery:
+
+- branding of printed material, e.g. reports, posters.
+
+Standard template (site header, page header, page footer, site footer) e.g.,
+https://ec.europa.eu/component-library/ec/standardised-template/
+
+##
+
+**Applied branding**
+
+Specific example of branding applied to an **EEA standard webpage** (e.g.
+article/briefing):
+
+- Layout example of a webpage with applied template, in 3 main layouts:
+  - Mobile (vertical)
+  - Tablet/mobile-landscape (landscape)
+  - Desktop
+
+(This does not include the 3 mockups that are to be delivered to COM by 15
+December)
+##
+
+**Mobile first**
+
+Design proposals should start with the smallest resolution and viewport in mind
+(mobile-first), and progressively create layouts for the next resolution and so
+on (progressive enhancements).
+
+**Mobile**: Provide a design for mobile displays with size 360×640 (this will help
+us create a fluid design from 360×640 through 414×896)
+
+**Tablet**: Provide a design for tablet displays by giving a design with size
+768×1024 (this will help us create a fluid design from 601×962 through
+1280×800)
+
+**Desktop**: Provide a design for desktop displays by giving a design with size
+1366×768 (this will help us create a fluid design from 1024×768 through
+1920×1080)
+
+# Requirement 2 — Core Semantic-UI theme
+
+**Delivery by End-Jan 2022**
+
+- Design system static website
+- Semantic-UI theme and themed components
 
 <!--
-We create and assign a task pool for each website and dynamic pools are not
-supported by Apache Airflow, if you're curious, check out our code.
-
-Once created, the pools are persistent and can be adjusted to the number of
-  slots, which is how many tasks can run on that "pool" at one time
+Branding applied to Semantic UI core elements - https://react.semantic-ui.com/
 -->
 
+## Design system as static website
 
-## Task 2: stash documents in ES
+- Use Docusaurus and Storybook
+- Deploy on https://design.eea.europa.eu and
+  https://design-storybook.eea.europa.eu
+- Content similar to Europa Component Library (ECL)
+- Include Semantic-UI-React themed components
 
-![bg 60%](./statics/airflow-prepare-docs.png)
+### Implemention
 
-<!-- Now we stash the documents in ElasticSearch. From here we have a bunch of
-many dag triggers which process each document and run it through our NLP
-pipeline -->
-
-## Task 3: extract, enrich
-
-![bg 60%](./statics/task-logging.png)
-
-<!-- We crawl every URL with a headless browser, extract the HTML and convert
-to plain text with a Python library trafilatura. This is just for the main
-portion of the text, the metadata is directly extracted via plone.restapi
--->
-
-## NLP Server
-
-- Python, FastAPI
-- gh:eea/nlp-server
-- gh:deepset/haystack
-- Tranformers, HuggingFace
-
-![bg right:60% 90%](./statics/deployed-nlp.png)
-
-<!-- Runs
-
-Now, this is probably my third NLP server that I have written so far. I hope
-it's the last, as the pace of development in the open source field of NLP and
-machine learning is awesome these days. Many tech giants opensourced not only
-their code, but also their trained models, as that is one of the biggest
-hurdles in sucessfully implementing ML-based products. So, this time the NLP
-service is a rather thin wrapper on top of top libraries such as Haystack,
-Transformers and the HuggingFace model repository.
-
-The NLP server can selectively run all its configured services, so it's
-possible to scale certain services from the deployment infrastructure.
-
-We plan on adding more services. If we have time, I can demonstrate some of the
-things that it can do right now.
--->
-
-## NLP-Server Capabilities
-
-- Elasticsearch proxy
-- ES search results reranking
-- Question and Answering
-- Query classification
-- Summarization
-- Text Similarity
-- Question generation
-- Named Entity Recognition extraction
-- Zero-shot classifier
-- Text embedding
+Should be a part of https://github.com/eea/volto-eea-design-system
 
 <!--
-- Elasticsearch proxy
-- ES search results reranking
-- Question and Answering
-- Query classification
-- Summarization
-- Text Similarity
-- Question generation
-- Named Entity Recognition extraction
-- Zero-shot classifier
-- Text embedding
--->
+Based on these new branding and design principles, implementation of
+  a complete online design system. The design system is to be published as
+  a website under the EEA domain, e.g., https://design.eea.europa.eu (using
+  Docusaurus and Storybook) documenting and showcasing all elements of the new
+  design. Its content is expected to be similar to
+  https://ec.europa.eu/component-library/ec/ with EEA specific needs.
+  -->
 
-## NLP-Server Configuration
+## Content of design system website
 
-.yml based pipeline configuration
+Including, but not limited to:
 
-![bg right:60% 90%](./statics/search-pipeline.png)
+- **Core branding**: colors, typography, spacing, general page structure (alignment, high-level page structure)
+- **Core Semantic-UI React components**
+- **Low-level EEA components** for EEA websites
 
-## QA process
+**Post-milestone**
 
-- models trained with dual-encoder framework
-- topK results are retrieved from document store
-- Reader model reads docs and extracts answers
+In time, all layouts and components need to be added to the EEA Design System.
 
-![bg right:60% 90%](./statics/dense-passage.png)
+<!-- these are the elements that we'll watch out for (coming in the next
+slides) -->
+
+## Core Semantic-UI React components
+
+<!-- _class: invert columns -->
+
+- Button
+- Container
+- Grid
+- Card
+- Item
+- Segment
+- Statistic
+- Form
+- Input
+- Table
+- Message
+- Header
+- Image
+- Label
+- Dropdown
+- Menu
+- List
+- Accordion
+- Popup
+- Progress
+- Checkbox
+- Confirm
+- Modal
+- Breadcrumb
+- Tab
+- Radio
+- Pagination
+- Comment, etc
+
+## Low-level components for EEA websites
+
+<!-- _class: invert columns -->
+
+- Table of Contents
+- Blockquotes
+- Pullquotes
+- Timeline
+- Page
+- Banner
+- Featured Item
+- Inpage navigation
+- Grids
+- ... etc.
+
+Identify **more core EEA components** from EEA websites!
+
+## Grid layout
+
+HTML/CSS/JS with grid layout for a Standard page/Article/News/Briefing
+
+Grid for main site template.
+
+"Content grid" for the article page.
+
+https://ec.europa.eu/component-library/ec/standardised-template/
+
+## Semantic-UI Theme and React components
+
+**Components and CSS Implementation**
+
+- The design system will be based on specific Semantic UI React-components
+  (https://react.semantic-ui.com/elements/header/), that will need to be styled
+  according to the EEA design systems and then re-used by designers and web
+  developers working in other projects/contracts at EEA.
+
+# Guiding principles
+
+### Accessibility
+
+- Highly accesible implementation of components is expected. See WCAG 2.0
+(A/AA/AAA) accessibility standards and requirements
+
+### Iconography as SVG
+
+- Iconography for the new design system, in vector format as SVG icons library.
+
+We're using FontAwesome-derived icons. New icons should be delivered as SVG
+icons.
+
+##
+
+### Github repos
+
+All the source code and design system deliverables will be managed in
+specific repos in EEA GitHub (https://github.com/eea) and design system
+website hosted at EEA.
+
+EEA Semantic-UI Theme:
+https://github.com/eea/volto-eea-design-system
+
+This repo should also host the Docusaurus, Storybook, Figma and designer kits
+implementations.
+
+##
+
+### Development workflow
+
+Use Gitflow-based development workflow. Master branch is protected, separate
+PRs for features/bugfixes to the develop branch. Releases are produced by
+merging develop to master.
+
+Use semantic-versioned Github releases. Ex:
+https://github.com/ec-europa/europa-component-library/releases
+
+### Software quality
+
+Webscore - https://webscore.eea.europa.eu
+
+# Requirement 3 — all design elements
+
+**Delivery by End-Feb 2022**
+
+- Content types and variations
+- Port EEA specific design elements to Semantic-UI
+
+##
+
+- Standard web page
+- Article/News/Briefing (Web report)
+- Report (with one or more PDFs)
+- Web report
+- Indicator
+- Visualizations:
+  - Map (static/interactive)
+  - Chart (static/interactive)
+  - Dashboard
+  - Infographic
+- FAQs
+
+##
+
+Views:
+
+- Listing of pages
+- Card
+- Form elements
+- Search pages
 
 <!--
-The QA pipeline is probably the most important for us right now. It's based on
-Deepset Haystack models, which provides specialized models for QA. Those models
-are trained with a special framework called dual-head encoder, which is
-a recent technique that appeared in the last year.
+##
 
-Because on the fly tokenization and vectorization is rather expensive, the
-usual process is to retrieve the "best candidates" using either a dense
-retriever (a vector capable database, such as Weaviate or Faiss) or sparse
-(simple Elasticsearch BM25 ranking), then these candidates are passed to the
-Reader model, which extracts and ranks the answers from the candidates.
+Porting the EEA specific design elements from existing Web design style guide
+to Semantic UI:
+
+- Layout
+- Elements
+- Components
+- Old TinyMCE styles
 -->
 
-## Current status
+## Deliverables
 
-- Work started in April-May 2021
-- Launch due next year
-- Already in use as non-NLP integrated app
-- Also used for non-EEA projects (CodeSyntax)
-- Volto integration exists
-- Future: UI improvements, more NLP
+HTML markup expressed as **React components** library, CSS stylesheet library
+integrated with Semantic-UI. Should include variations for responsive design.
 
-<!-- talk about challenges: pnpm monorepo, managing dependencies, overlap of
-dependencies with Volto builtins -->
+# Requirement 4 — New website Sitemap
 
-![bg right:30% 60%](./statics/volto-searchlib.png)
+**Delivery by End-Feb 2022**
 
-<!--
-    QUESTIONS = [
-        "what is the status of our forests",
-        "what is PFAS?",
-        "how does PFAS get into human?",
-        "what is the cumulative surface area of the Natura 2000?",
-        "what percentage of europe population is connected to waste water treatement?",
-        "How is the status of fish species in Europe?",
-        "What is the BISE?",
-        "how much does transport contributes to GHG emissions in EU?",
-        "Which cities in Europe have the worst air quality?",
-        "What car is best for the environment?",
-        "What transport mode is best for the environment?",
-        "What EU legislation safeguards our water?",
-        "What is land accounting?",
-        "What countries had the highest land take in the EEA-39 between 2000 and 2018?",
-        "Why is urban sprawl bad?",
-        "what are controlled substances",
-        "what is plastic",
-        "What year did car manufacturers meet their binding emissions target?",
-        "What is the percentage of surface water bodies with less than good status?",
-        "What is the most common pollutant in water bodies in Europe?",
-        "Where can I access greenhouse gas data",
-        "What is the trend on greenhouse gas emissions from transport",
-        "what is the best transport mode",
-        "what are ecosystem services",
-        "bathing water quality",
-        "greenhouse gas emissions trends",
-        "waste generation trends",
+The information architecture.
+
+At least 3 levels of depth of the new website sitemap (including datahub and
+linkages to the other EEA websites). Description of each of the sections and
+pages of the new sitemap.
+
+##
+
+Specification of customization of EEA branding for:
+
+- Co-owned site, community managed: EEA + partner, e.g., Climate-Adapt, BISE,
+WISE, FISE…
+- Non-EEA sites, like Copernicus sites (have own defined branding and design
+system)
+- Network sites like https://epanet.eea.europa.eu/
+- Eionet websites? (There is consensus to merge Eionet with EEA site).
+
+##
+**Delivery details**:
+
+Sitemap specification using template XYZ (e.g.
+https://templatelab.com/file/95232/)
+
+# Requirement 5 — new Homepage
+
+**Delivery: End-May 2022**
+
+Deliveries:
+
+- Approved Figma layouts in 3 layouts (desktop, tablet, phone)
+- Implemented HTML elements in design system
+
+# Requirement 6 — Detailed layout for main sections
+
+**Delivery: End-May**
+
+(each of the top navigation)
+
+Deliveries:
+
+- Approved Figma layouts (desktop, tablet, phone)
+- Implemented HTML elements in design system
+
+# Requirement 7 — On-demand support
+
+On-demand support to apply design system to specific web applications
+- continuous activity until launch date March 23
+
+At least one front-end developer and at least one UX designer available on
+a daily basis for supporting the Web Development Team (DIS1) on implementation
+of design.
+
+- UX and design support for the new EEA website
+- UX and design support for the new EEA search
+- UX and design support for the new Data hub
+
+## Maintainance, further development of the design system
+
+- Maintain and develop further the design system
+- Integrate with other systems (EEA Semantic Search)
+
+# More to come
+
+- Datahub frontpage design delivery
+- EEA design system applied to Plotly charts. The UX contractor would need to
+also provide examples and themes for the Plotly charts, that we can integrate
+in the Plone components.
 
 
+## Follow-up meetings
 
+Schedule follow-up meetings.
 
-how covid contributes to pollution?
-who is the director of EEA?
-what are the problems for clean waters
-which is the most ecological means of transportation?
+- Establish direct contact points with ITML UX/frontend developers to EDW
+  developers (Tibi+David)
+- Mini-training on Volto theming and release process
+- ?
 
-tag aici
-https://github.com/eea/semanticsearch-frontend/blob/develop/package.json
--->
+## Demo site
 
-## Thank you!
+We want to have a demo website with the design system in place.
+
+- demo-www.eea.europa.eu - live website with EEA Design System CSS in use
+- design.eea.europa.eu - static website design system
+- design-storybook.eea.europa.eu - Storybook stories, linked from the design system
+
+## Working teams
+
+- EEA staff & editors
+- EDW website developers
+  - backend
+  - frontend
+  - devops
+- ITML design + UX + frontend
+
+## Resource people
+
+- David Ichim, main EEA website frontend developer
+  - EEA frontend expert
+
+- Tiberiu Ichim, lead developer for thematic websites
+  - Volto systems expert
+
+- Backup: Alin Voinea, lead developer EEA website
+  - DevOps, Development process expert
+
+Contact on EEA Riot, "EEA Design System" room.
+
+Who is ITML contact point?
